@@ -7,8 +7,11 @@ interface LegalProps {
 
 export default function LegalPages({ viewType }: LegalProps) {
   return (
-    <div
+    <motion.div
       id={`legal-page-${viewType}`}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
       className="mx-auto max-w-4xl px-4 py-12 space-y-10"
     >
             {/* 1. Terms & Conditions View */}
@@ -226,6 +229,6 @@ export default function LegalPages({ viewType }: LegalProps) {
         </div>
       )}
 
-    </div>
+     </motion.div>
   );
 }

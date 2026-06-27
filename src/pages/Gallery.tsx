@@ -47,8 +47,11 @@ export default function Gallery({ onBookClick }: GalleryProps) {
   });
 
   return (
-    <div
+    <motion.div
       id="gallery-page-container"
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
       className="space-y-10 pb-12 pt-4"
     >
       
@@ -235,6 +238,6 @@ export default function Gallery({ onBookClick }: GalleryProps) {
         </div>
       </section>
 
-    </div>
+     </motion.div>
   );
 }

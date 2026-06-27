@@ -78,41 +78,32 @@ export default function App() {
           </div>
 
           <main id="main-content-area" className={`flex-grow pb-12 bg-black ${activePage === 'home' ? 'pt-0' : 'pt-6'}`}>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activePage}
-                initial={{ opacity: 0, scale: 0.985, y: 12 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.985, y: -12 }}
-                transition={{ type: 'spring', stiffness: 120, damping: 18, mass: 0.8 }}
-                className="w-full"
-              >
-                {activePage === 'home' && (
-                  <Home setActivePage={setActivePage} onBookClick={() => handleBookWithProject()} />
-                )}
-                {activePage === 'about' && (
-                  <AboutUs onBookClick={() => handleBookWithProject()} />
-                )}
-                {activePage === 'projects' && (
-                  <Projects onBookClick={handleBookWithProject} />
-                )}
-                {activePage === 'managed' && (
-                  <ManagedFarmland onBookClick={() => handleBookWithProject()} />
-                )}
-                {activePage === 'journey' && (
-                  <YourJourney onBookClick={() => handleBookWithProject()} />
-                )}
-                {activePage === 'gallery' && (
-                  <Gallery onBookClick={() => handleBookWithProject()} />
-                )}
-                {activePage === 'contact' && (
-                  <Contact onBookClick={() => handleBookWithProject()} />
-                )}
-                {(activePage === 'terms' || activePage === 'privacy' || activePage === 'disclaimer') && (
-                  <LegalPages viewType={activePage} />
-                )}
-              </motion.div>
-            </AnimatePresence>
+            <div className="w-full">
+              {activePage === 'home' && (
+                <Home setActivePage={setActivePage} onBookClick={() => handleBookWithProject()} />
+              )}
+              {activePage === 'about' && (
+                <AboutUs onBookClick={() => handleBookWithProject()} />
+              )}
+              {activePage === 'projects' && (
+                <Projects onBookClick={handleBookWithProject} />
+              )}
+              {activePage === 'managed' && (
+                <ManagedFarmland onBookClick={() => handleBookWithProject()} />
+              )}
+              {activePage === 'journey' && (
+                <YourJourney onBookClick={() => handleBookWithProject()} />
+              )}
+              {activePage === 'gallery' && (
+                <Gallery onBookClick={() => handleBookWithProject()} />
+              )}
+              {activePage === 'contact' && (
+                <Contact onBookClick={() => handleBookWithProject()} />
+              )}
+              {(activePage === 'terms' || activePage === 'privacy' || activePage === 'disclaimer') && (
+                <LegalPages viewType={activePage} />
+              )}
+            </div>
           </main>
 
           {/* Bottom Footer layout */}

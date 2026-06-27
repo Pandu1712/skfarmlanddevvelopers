@@ -79,7 +79,6 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      exit="hidden"
       className="space-y-12 pb-12"
     >
       
