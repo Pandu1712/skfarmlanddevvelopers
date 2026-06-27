@@ -1,0 +1,6 @@
+{
+  "name": "SK Farmland Developers",
+  "description": "Premium managed and plain farmland projects near Bengaluru. Invest, build your dream farmhouse, and experience true nature living with flexible options.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
