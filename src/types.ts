@@ -1,4 +1,4 @@
-export type PageId = 'home' | 'about' | 'projects' | 'managed' | 'journey' | 'gallery' | 'contact' | 'terms' | 'privacy' | 'disclaimer';
+export type PageId = 'home' | 'about' | 'projects' | 'managed' | 'journey' | 'gallery' | 'contact' | 'faqs' | 'testimonials' | 'terms' | 'privacy' | 'disclaimer';
 
 export interface StatItem {
   icon: string;

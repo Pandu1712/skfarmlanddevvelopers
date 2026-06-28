@@ -20,6 +20,8 @@ import YourJourney from './pages/YourJourney';
 import Gallery from './pages/Gallery';
 import Contact from './pages/Contact';
 import LegalPages from './pages/LegalPages';
+import Faqs from './pages/Faqs';
+import Testimonials from './pages/Testimonials';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -61,7 +63,12 @@ export default function App() {
           className="flex flex-col min-h-screen"
         >
           {/* Sticky Navigation & Announcement Bar Container */}
-          <div className="sticky top-0 z-40 w-full flex flex-col">
+          <div className="sticky top-0 z-40 w-full flex flex-col shadow-md">
+            <Navbar
+              activePage={activePage}
+              setActivePage={setActivePage}
+              onBookClick={() => handleBookWithProject()}
+            />
             <AnimatePresence initial={false}>
               {showTopHeader && (
                 <TopHeader
@@ -70,11 +77,6 @@ export default function App() {
                 />
               )}
             </AnimatePresence>
-            <Navbar
-              activePage={activePage}
-              setActivePage={setActivePage}
-              onBookClick={() => handleBookWithProject()}
-            />
           </div>
 
           <main id="main-content-area" className={`flex-grow pb-12 bg-black ${activePage === 'home' ? 'pt-0' : 'pt-6'}`}>
@@ -83,7 +85,7 @@ export default function App() {
                 <Home setActivePage={setActivePage} onBookClick={() => handleBookWithProject()} />
               )}
               {activePage === 'about' && (
-                <AboutUs onBookClick={() => handleBookWithProject()} />
+                <AboutUs setActivePage={setActivePage} onBookClick={() => handleBookWithProject()} />
               )}
               {activePage === 'projects' && (
                 <Projects onBookClick={handleBookWithProject} />
@@ -100,11 +102,24 @@ export default function App() {
               {activePage === 'contact' && (
                 <Contact onBookClick={() => handleBookWithProject()} />
               )}
+              {activePage === 'faqs' && (
+                <Faqs setActivePage={setActivePage} />
+              )}
+              {activePage === 'testimonials' && (
+                <Testimonials setActivePage={setActivePage} />
+              )}
               {(activePage === 'terms' || activePage === 'privacy' || activePage === 'disclaimer') && (
-                <LegalPages viewType={activePage} />
+                <LegalPages activePage={activePage} setActivePage={setActivePage} />
               )}
             </div>
           </main>
+
+          {/* Contact Section globally rendered above footer (only on home page) */}
+          {activePage === 'home' && (
+            <div className="border-t border-zinc-900/50 bg-black pt-4">
+              <Contact onBookClick={() => handleBookWithProject()} />
+            </div>
+          )}
 
           {/* Bottom Footer layout */}
           <Footer setActivePage={setActivePage} onBookClick={() => handleBookWithProject()} />

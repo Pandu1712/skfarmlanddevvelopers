@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
+import logoTextImg from '../assets/logo-text.png';
 import Logo from './Logo';
+
 
 interface LoaderProps {
   onComplete: () => void;
@@ -53,27 +55,22 @@ export default function Loader({ onComplete }: LoaderProps) {
           <Logo className="w-60 h-60" showText={false} />
         </motion.div>
 
-        {/* Luxury Text Tracking Animation below logo */}
-        <div className="mt-4 overflow-hidden text-center h-16">
-          <motion.h1
-            id="loader-brand-text"
-            initial={{ y: 30, opacity: 0 }}
-            animate={step >= 1 ? { y: 0, opacity: 1 } : { y: 30, opacity: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="text-base font-extrabold uppercase tracking-[0.35em] text-orange-500 md:text-lg font-sans"
-          >
-            SK FARMLAND
-          </motion.h1>
-          <motion.p
-            id="loader-brand-subtitle"
-            initial={{ opacity: 0 }}
-            animate={step >= 2 ? { opacity: 0.7 } : { opacity: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-[10px] uppercase tracking-[0.55em] text-zinc-400 font-mono mt-1.5"
-          >
-            DEVELOPER'S
-          </motion.p>
-        </div>
+        {/* Luxury Text Logo Image below logo */}
+        <motion.div
+          id="loader-text-logo-container"
+          initial={{ y: 20, opacity: 0 }}
+          animate={step >= 1 ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-6 flex justify-center"
+        >
+          <img
+            src={logoTextImg}
+            alt="SK Farmland Developers"
+            className="w-[400px] h-auto max-w-[90vw] object-contain"
+          />
+        </motion.div>
+
+
 
         {/* Minimalist Progress Bar */}
         <div className="absolute bottom-[-60px] w-48 h-[1px] bg-zinc-900 overflow-hidden rounded-full">

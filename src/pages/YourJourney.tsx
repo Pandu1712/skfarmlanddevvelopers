@@ -47,14 +47,14 @@ export default function YourJourney({ onBookClick }: YourJourneyProps) {
       transition={{ duration: 0.5, ease: 'easeOut' }}
       className="space-y-10 pb-12 pt-4"
     >
-      
+
       {/* Header / Hero */}
       <section id="journey-hero" className="text-center space-y-4 max-w-3xl mx-auto px-4">
         <div className="inline-flex items-center gap-2 px-3 py-1 bg-orange-500/10 rounded-full border border-orange-500/20 text-orange-400 font-mono text-[10px] uppercase tracking-widest">
           <Leaf size={11} className="animate-pulse" />
           🌿 Your Journey With SK Farmland Developers
         </div>
-        <motion.h1 
+        <motion.h1
           initial="hidden"
           animate="visible"
           variants={{
@@ -83,7 +83,7 @@ export default function YourJourney({ onBookClick }: YourJourneyProps) {
 
       {/* Values Timeline Section */}
       <section id="journey-timeline" className="mx-auto max-w-4xl px-4 relative">
-        
+
         {/* Decorative timeline line */}
         <div className="hidden md:block absolute left-12 top-20 bottom-20 w-[1px] bg-zinc-900" />
         <div className="hidden md:block absolute left-12 top-20 bottom-20 w-[1px] bg-gradient-to-b from-orange-500/20 via-orange-500/5 to-transparent" />
@@ -101,7 +101,7 @@ export default function YourJourney({ onBookClick }: YourJourneyProps) {
               key={idx}
               className="relative flex flex-col md:flex-row items-start gap-6 md:gap-10 group"
             >
-              
+
               {/* Step indicator bubble */}
               <div className="flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#0A0A0A] border border-zinc-800 text-orange-500 shrink-0 font-bold font-mono text-sm group-hover:border-orange-500/40 transition-all duration-300 z-10 shadow-md">
                 {val.step}
@@ -153,6 +153,6 @@ export default function YourJourney({ onBookClick }: YourJourneyProps) {
         </div>
       </section>
 
-     </motion.div>
+    </motion.div>
   );
 }

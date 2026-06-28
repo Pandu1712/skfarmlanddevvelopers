@@ -16,9 +16,9 @@ export default function MobileContactBar() {
       {/* Call Now Button */}
       <a
         href={phoneUrl}
-        className="flex-1 flex items-center justify-center gap-2 bg-[#016335] text-white text-xs font-bold uppercase tracking-wider transition-colors duration-300 hover:bg-[#004f29] active:bg-[#003b1e]"
+        className="flex-1 flex items-center justify-center gap-2 bg-red-600 text-white text-base font-bold uppercase tracking-wider transition-colors duration-300 hover:bg-red-700 active:bg-red-800"
       >
-        <Phone size={14} className="stroke-[2.5]" />
+        <Phone size={18} className="stroke-[2.5]" />
         Call Now
       </a>
 
@@ -27,10 +27,10 @@ export default function MobileContactBar() {
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex-1 flex items-center justify-center gap-2 bg-[#00e676] text-white text-xs font-bold uppercase tracking-wider transition-colors duration-300 hover:bg-[#00c965] active:bg-[#00b057]"
+        className="flex-1 flex items-center justify-center gap-2 bg-[#00e676] text-black text-base font-bold uppercase tracking-wider transition-colors duration-300 hover:bg-[#00c965] active:bg-[#00b057]"
       >
         <svg
-          className="w-4.5 h-4.5 fill-current"
+          className="w-5 h-5 fill-current"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
         >

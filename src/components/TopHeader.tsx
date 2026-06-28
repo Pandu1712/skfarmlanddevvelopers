@@ -1,12 +1,35 @@
-import { motion } from 'motion/react';
-import { X, Sparkles, MapPin, Compass } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { X, Sparkles } from 'lucide-react';
 
 interface TopHeaderProps {
   onClose: () => void;
   onActionClick?: () => void;
 }
 
-export default function TopHeader({ onClose, onActionClick }: TopHeaderProps) {
+export default function TopHeader({ onClose }: TopHeaderProps) {
+  const [index, setIndex] = useState(0);
+
+  const lines = [
+    { text: "350 Acres Premium Farmland — Anekal Thalli Road", isLink: false },
+    { text: "New Launch: SK Banyan Echoes — Sikkanapalli", isLink: false },
+    { text: "Site Visits Available Every Weekend — Book Now on WhatsApp", isLink: true }
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % lines.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const handleWhatsAppRedirect = () => {
+    const message = encodeURIComponent(
+      'Hi SK Farmland Developers, I am interested in booking a site visit for this weekend. Please share more details.'
+    );
+    window.open(`https://wa.me/919900078600?text=${message}`, '_blank');
+  };
+
   return (
     <motion.div
       id="top-announcement-header-wrapper"
@@ -17,40 +40,51 @@ export default function TopHeader({ onClose, onActionClick }: TopHeaderProps) {
       className="w-full overflow-hidden shrink-0"
     >
       <div
-        id="top-announcement-header"
-        className="relative z-50 w-full bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-black py-2.5 px-4 sm:px-6 lg:px-8 shadow-md select-none"
+        className="relative z-50 w-full bg-gradient-to-r from-yellow-500 via-yellow-400 to-yellow-500 text-black py-2 px-4 sm:px-6 lg:px-8 shadow-md select-none border-y-[2px] border-red-600"
       >
-        {/* Decorative ambient background line */}
-        <div className="absolute inset-x-0 bottom-0 h-[1.5px] bg-black/10" />
 
         <div className="mx-auto max-w-7xl flex items-center justify-between gap-4">
           
           {/* Empty left spacer on desktop to balance the layout perfectly centering the message */}
           <div className="hidden md:block w-8" />
 
-          {/* Center content */}
-          <div className="flex-1 flex items-center justify-center gap-2 text-center">
-            <motion.span
-              animate={{ scale: [1, 1.15, 1] }}
-              transition={{ repeat: Infinity, duration: 2.2, ease: 'easeInOut' }}
-              className="inline-flex text-zinc-950 shrink-0"
-            >
-              <Sparkles size={13} className="fill-current" />
-            </motion.span>
-
-            {/* Desktop view text */}
-            <span className="hidden md:inline-flex items-center gap-2.5 uppercase tracking-[0.12em] text-[11px] font-extrabold text-black">
-              <span>350 Acres Premium Managed Farmland</span>
-              <span className="opacity-45 text-black font-normal">•</span>
-              <span>Near Anekal Thalli Road</span>
-            </span>
-
-            {/* Mobile view text */}
-            <span className="md:hidden flex flex-wrap items-center justify-center gap-x-1.5 gap-y-0.5 uppercase tracking-[0.08em] text-[9.5px] font-extrabold text-black leading-tight">
-              <span>350 Acres Premium Farmland</span>
-              <span className="opacity-45 text-black font-normal">•</span>
-              <span>Anekal Thalli Road</span>
-            </span>
+          {/* Center content with AnimatePresence */}
+          <div className="flex-1 flex items-center justify-center min-h-[22px] overflow-hidden relative">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={index}
+                initial={{ x: 100, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: -100, opacity: 0 }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                className="flex items-center justify-center gap-1.5 text-center w-full"
+              >
+                <Sparkles size={11} className="fill-current text-black shrink-0 animate-pulse" />
+                
+                {lines[index].isLink ? (
+                  <button
+                    onClick={handleWhatsAppRedirect}
+                    className="text-xs sm:text-sm md:text-2xl font-black uppercase tracking-wider text-white hover:scale-105 transition-transform cursor-pointer flex items-center gap-2 leading-tight"
+                    style={{ 
+                      textShadow: '-1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px 1.5px 0 #000, 3px 3px 0 #000', 
+                      fontFamily: 'Impact, "Arial Black", sans-serif' 
+                    }}
+                  >
+                    {lines[index].text}
+                  </button>
+                ) : (
+                  <span 
+                    className="text-xs sm:text-sm md:text-2xl font-black uppercase tracking-wider text-white leading-tight"
+                    style={{ 
+                      textShadow: '-1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px 1.5px 0 #000, 3px 3px 0 #000', 
+                      fontFamily: 'Impact, "Arial Black", sans-serif' 
+                    }}
+                  >
+                    {lines[index].text}
+                  </span>
+                )}
+              </motion.div>
+            </AnimatePresence>
           </div>
 
           {/* Close Button right aligned */}
@@ -60,7 +94,7 @@ export default function TopHeader({ onClose, onActionClick }: TopHeaderProps) {
             aria-label="Dismiss announcement"
             className="p-1 rounded-full text-zinc-950 hover:bg-black/10 transition-colors focus:outline-none focus:ring-2 focus:ring-black/20 cursor-pointer active:scale-90"
           >
-            <X size={15} className="stroke-[2.5]" />
+            <X size={14} className="stroke-[2.5]" />
           </button>
 
         </div>

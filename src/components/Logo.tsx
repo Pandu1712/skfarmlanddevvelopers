@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import logoImg from '../assets/logo.jpg';
+import logoTextImg from '../assets/logo-text.png';
 
 interface LogoProps {
   className?: string;
@@ -13,8 +14,8 @@ export default function Logo({ className = 'w-16 h-16', showText = true, animate
   
   // Define dimensions to maintain original logo aspect ratio (approx 3:2)
   const sizeClasses = isLarge 
-    ? 'w-[270px] h-[180px] rounded-xl border-2' 
-    : 'w-[54px] h-[36px] md:w-[75px] md:h-[50px] rounded-md border';
+    ? 'w-[315px] h-[210px] rounded-xl border-2' 
+    : 'w-[66px] h-[44px] md:w-[87px] md:h-[58px] rounded-md border';
 
   const containerVariants = {
     initial: {},
@@ -25,20 +26,10 @@ export default function Logo({ className = 'w-16 h-16', showText = true, animate
     }
   };
 
-  const letterVariants = {
-    initial: { y: 0 },
-    hover: { 
-      y: -4,
-      scale: 1.15,
-      color: '#f97316', // tailwind orange-500
-      transition: { type: 'spring', stiffness: 350, damping: 8 }
-    }
-  };
-
   return (
     <motion.div 
       id="sk-logo-wrapper" 
-      className="flex items-center gap-3.5 select-none cursor-pointer"
+      className="flex items-center gap-5 select-none cursor-pointer"
       initial="initial"
       whileHover="hover"
       animate="animate"
@@ -73,54 +64,16 @@ export default function Logo({ className = 'w-16 h-16', showText = true, animate
       {showText && (
         <motion.div
           id="sk-logo-text"
-          className="flex flex-col select-none"
+          className="flex items-center justify-center select-none pt-1"
           initial={{ opacity: 0, x: -8 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, ease: 'easeOut', delay: 0.15 }}
         >
-          {/* Main Logo Text with spring bounce letters on hover */}
-          <span className="text-xs md:text-sm font-black tracking-[0.2em] text-white font-sans uppercase flex items-center">
-            {/* S and K letters with distinct highlight */}
-            <motion.span 
-              className="text-amber-500 mr-0.5"
-              variants={letterVariants}
-            >
-              S
-            </motion.span>
-            <motion.span 
-              className="text-amber-500 mr-1.5"
-              variants={letterVariants}
-            >
-              K
-            </motion.span>
-            
-            {/* FARMLAND letters */}
-            {"FARMLAND".split("").map((letter, i) => (
-              <motion.span
-                key={i}
-                className="inline-block origin-bottom"
-                variants={letterVariants}
-              >
-                {letter}
-              </motion.span>
-            ))}
-          </span>
-
-          {/* Subtitle "DEVELOPERS" with smooth pulse effect */}
-          <motion.span
-            className="text-[8px] md:text-[9px] tracking-[0.4em] md:tracking-[0.45em] text-zinc-400 uppercase font-mono mt-0.5 inline-block"
-            animate={{ 
-              color: ['#a1a1aa', '#f59e0b', '#a1a1aa'],
-              scale: [1, 1.02, 1]
-            }}
-            transition={{ 
-              repeat: Infinity, 
-              duration: 4, 
-              ease: 'easeInOut' 
-            }}
-          >
-            DEVELOPERS
-          </motion.span>
+          <img
+            src={logoTextImg}
+            alt="SK Farmland Developers"
+            className="h-[40px] md:h-[54px] w-auto object-contain"
+          />
         </motion.div>
       )}
     </motion.div>

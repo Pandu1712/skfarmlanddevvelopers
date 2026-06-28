@@ -21,6 +21,11 @@ export default function Navbar({ activePage, setActivePage, onBookClick }: Navba
     { id: 'managed', label: 'Managed Farmland' },
     { id: 'journey', label: 'Your Journey' },
     { id: 'gallery', label: 'Gallery' },
+    { id: 'faqs', label: 'FAQs' },
+    { id: 'testimonials', label: 'Testimonials' },
+    { id: 'terms', label: 'Terms & Conditions' },
+    { id: 'privacy', label: 'Privacy Policy' },
+    { id: 'disclaimer', label: 'Disclaimer' },
     { id: 'contact', label: 'Contact' },
   ];
 
@@ -49,7 +54,7 @@ export default function Navbar({ activePage, setActivePage, onBookClick }: Navba
           {/* Desktop Navigation */}
           <nav 
             id="desktop-navigation" 
-            className="hidden lg:flex items-center gap-1 xl:gap-2 flex-nowrap"
+            className="hidden lg:flex items-center gap-0.5 flex-nowrap overflow-x-auto scrollbar-none max-w-[85%]"
             onMouseLeave={() => setHoveredItem(null)}
           >
             {menuItems.map((item) => {
@@ -61,8 +66,8 @@ export default function Navbar({ activePage, setActivePage, onBookClick }: Navba
                   id={`nav-link-${item.id}`}
                   onClick={() => handleNavClick(item.id)}
                   onMouseEnter={() => setHoveredItem(item.id)}
-                  className={`relative px-3 py-2 rounded-lg text-[11px] xl:text-xs font-semibold uppercase tracking-wide transition-colors duration-300 cursor-pointer whitespace-nowrap ${
-                    isActive ? 'text-orange-450 font-extrabold' : 'text-zinc-400 hover:text-white'
+                  className={`relative px-1.5 py-1.5 rounded-lg text-[10px] xl:text-[11px] font-bold tracking-wide transition-colors duration-300 cursor-pointer whitespace-nowrap ${
+                    isActive ? 'text-orange-500 font-extrabold' : 'text-zinc-400 hover:text-white'
                   }`}
                 >
                   <span className="relative z-10">{item.label}</span>
@@ -89,20 +94,7 @@ export default function Navbar({ activePage, setActivePage, onBookClick }: Navba
             })}
           </nav>
 
-          {/* Desktop CTA & Booking */}
-          <div id="desktop-cta-container" className="hidden lg:flex items-center gap-4">
-            <motion.button
-              id="header-cta-book-visit"
-              onClick={onBookClick}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="flex items-center gap-1.5 bg-gradient-to-r from-orange-600 to-amber-500 text-white text-[10px] xl:text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full hover:from-orange-500 hover:to-amber-400 transition-all duration-300 shadow-[0_4px_12px_rgba(249,115,22,0.22)] cursor-pointer whitespace-nowrap"
-            >
-              <Calendar size={12} className="text-white" />
-              Book Site Visit
-              <Sparkles size={10} className="animate-pulse" />
-            </motion.button>
-          </div>
+          {/* Desktop CTA & Booking - Removed to make room for extra links */}
 
           {/* Mobile Menu Button */}
           <div id="mobile-menu-trigger" className="flex lg:hidden">
@@ -137,7 +129,7 @@ export default function Navbar({ activePage, setActivePage, onBookClick }: Navba
                     key={item.id}
                     id={`mobile-nav-link-${item.id}`}
                     onClick={() => handleNavClick(item.id)}
-                    className={`block w-full text-left px-4 py-3 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+                    className={`block w-full text-left px-4 py-3 rounded-lg text-sm font-bold tracking-wide transition-all duration-200 cursor-pointer ${
                       isActive
                         ? 'bg-orange-600/10 text-orange-500 border-l-2 border-orange-500 pl-3.5'
                         : 'text-zinc-400 hover:bg-zinc-900 hover:text-white'

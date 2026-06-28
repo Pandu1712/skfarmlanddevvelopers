@@ -1,11 +1,100 @@
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'motion/react';
-import { Calendar, Compass, ShieldCheck, DollarSign, TrendingUp, Leaf, Award, Map, Users, Home as HomeIcon, Sparkles, ArrowRight, Check } from 'lucide-react';
+import { useRef, useState, useEffect } from 'react';
+import { motion, useScroll, useTransform, AnimatePresence, useInView, animate } from 'motion/react';
+import { Leaf, Award, Map, Users, Home as HomeIcon, Check, Calendar } from 'lucide-react';
 import { PageId } from '../types';
-import { statsData, incomeGenerators, projectList } from '../data';
+import { statsData } from '../data';
 import heroTop from '../assets/hero-top.jpg';
 import heroBottom from '../assets/hero-bottom.jpg';
-import gallery8 from '../assets/gallery-8.jpeg';
+import gallery1 from '../assets/gallery-1.jpeg';
+import gallery2 from '../assets/gallery-2.jpeg';
+import customHeroLeft from '../assets/custom-hero-left.jpg';
+import customHeroRight from '../assets/custom-hero-right.jpg';
+import hero1_1 from '../assets/hero 1 (1).jpeg';
+import hero1_2 from '../assets/hero 1 (2).jpeg';
+import hero1_3 from '../assets/hero 1 (3).jpeg';
+import hero1_4 from '../assets/hero 1 (4).jpeg';
+import hero1_5 from '../assets/hero 1 (5).jpeg';
+import hero1_6 from '../assets/hero 1 (6).jpeg';
+import hero1_7 from '../assets/hero 1 (7).jpeg';
+import hero1_8 from '../assets/hero 1 (8).jpeg';
+import hero1_9 from '../assets/hero 1 (9).jpeg';
+import hero1_10 from '../assets/hero 1 (10).jpeg';
+import hero1_11 from '../assets/hero 1 (11).jpeg';
+import project1_1 from '../assets/project1 (1).jpeg';
+import project1_2 from '../assets/project1 (2).jpeg';
+import project1_3 from '../assets/project1 (3).jpeg';
+import project1_4 from '../assets/project1 (4).jpeg';
+import project1_5 from '../assets/project1 (5).jpeg';
+import project1_6 from '../assets/project1 (6).jpeg';
+import project1_7 from '../assets/project1 (7).jpeg';
+import project1_8 from '../assets/project1 (8).jpeg';
+
+interface HeroCarouselProps {
+  images: string[];
+  labels: string[];
+  yBounce: number[];
+  className?: string;
+}
+
+function HeroCarousel({ images, labels, yBounce, className = "" }: HeroCarouselProps) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, 2000);
+    return () => clearInterval(timer);
+  }, [images.length]);
+
+  return (
+    <motion.div
+      animate={{ y: yBounce }}
+      transition={{ repeat: Infinity, duration: 7, ease: "easeInOut" }}
+      className={`w-full rounded-2xl overflow-hidden border-2 border-amber-500/80 shadow-[0_0_20px_rgba(245,158,11,0.25)] aspect-[16/10] relative group z-10 bg-black ${className}`}
+    >
+      <AnimatePresence initial={false}>
+        <motion.img
+          key={currentIndex}
+          src={images[currentIndex]}
+          alt={labels[currentIndex] || "Premium Farmland Project"}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+        />
+      </AnimatePresence>
+
+      {/* Soft premium shadow overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none z-20" />
+    </motion.div>
+  );
+}
+
+function AnimatedNumber({ value }: { value: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+
+  const numValue = parseInt(value.replace(/,/g, '').replace('+', ''), 10);
+  const suffix = value.includes('+') ? '+' : '';
+
+  useEffect(() => {
+    if (isInView && ref.current && !isNaN(numValue)) {
+      const controls = animate(0, numValue, {
+        duration: 2.5,
+        ease: "easeOut",
+        onUpdate(v) {
+          if (ref.current) {
+            ref.current.textContent = Intl.NumberFormat("en-US").format(Math.floor(v)) + suffix;
+          }
+        },
+      });
+      return () => controls.stop();
+    }
+  }, [isInView, numValue, suffix]);
+
+  return <span ref={ref}>0{suffix}</span>;
+}
 
 interface HomeProps {
   setActivePage: (page: PageId) => void;
@@ -18,15 +107,6 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
     target: heroRef,
     offset: ["start start", "end start"]
   });
-  const heroY = useTransform(heroScroll, [0, 1], ["0%", "30%"]);
-  const heroScale = useTransform(heroScroll, [0, 1], [1.05, 1.15]);
-
-  const natureRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress: natureScroll } = useScroll({
-    target: natureRef,
-    offset: ["start end", "end start"]
-  });
-  const natureY = useTransform(natureScroll, [0, 1], ["-12%", "12%"]);
 
   // Animation presets
   const containerVariants = {
@@ -37,15 +117,6 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
         staggerChildren: 0.15,
         delayChildren: 0.1,
       },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 25 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
     },
   };
 
@@ -80,473 +151,388 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="space-y-12 pb-12"
+      className="space-y-6 pb-12"
     >
-      
+
       {/* 1. Hero / Splash Section */}
-      <section ref={heroRef} id="hero-section" className="relative overflow-hidden pt-0 pb-4">
+      <section ref={heroRef} id="hero-section" className="relative overflow-hidden pt-4 pb-4">
         {/* Ambient radial orange glow background decoration */}
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[550px] h-[550px] bg-orange-500/5 rounded-full blur-3xl pointer-events-none z-0" />
 
-        <div className="relative z-10 mx-auto max-w-6xl px-4 grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 pt-0">
-          
-          {/* Top Hero Image: Luxury Gated Entry Gate */}
-          <motion.div 
-            variants={itemVariants} 
-            animate={{ y: [0, -6, 0] }}
-            transition={{ repeat: Infinity, duration: 7, ease: "easeInOut" }}
-            className="w-full rounded-2xl overflow-hidden border border-zinc-900 shadow-2xl shadow-black/80 aspect-[16/10] relative group z-10"
-          >
-            <img 
-              src={heroTop} 
-              alt="Premium Luxury Gated Entrance Gate" 
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" 
-            />
-            {/* Soft premium shadow overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-            <div className="absolute bottom-4 left-4 bg-black/85 backdrop-blur-sm border border-orange-500/20 px-3.5 py-1.5 rounded-lg text-[9px] uppercase tracking-widest text-orange-400 font-mono font-bold">
-              Gated Entry Plaza
-            </div>
-          </motion.div>
+        {/* Hero Title & Text */}
+        <div className="relative z-10 mx-auto max-w-6xl px-4 flex flex-col items-center text-center space-y-4 mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
+            Premium Gated Managed Farmland
+          </h1>
+          <p className="text-sm sm:text-base text-zinc-400 max-w-3xl mx-auto leading-relaxed">
+            SK Farmland Developers offers legally verified, gated farmland near Bangalore — fully developed, actively managed, and ready to own. No legal stress. No maintenance headaches. Just land that works for you.
+          </p>
+          <p className="text-[10px] sm:text-xs text-zinc-500 font-mono tracking-widest uppercase pt-2">
+            Trusted by 1,000+ families and investors across Bangalore's southern corridors.
+          </p>
+        </div>
 
-          {/* Bottom Hero Image: Sunset Resort Community */}
-          <motion.div 
-            variants={itemVariants} 
-            animate={{ y: [0, 6, 0] }}
-            transition={{ repeat: Infinity, duration: 7, ease: "easeInOut" }}
-            className="w-full rounded-2xl overflow-hidden border border-zinc-900 shadow-2xl shadow-black/80 aspect-[16/10] relative group z-10"
-          >
-            <img 
-              src={heroBottom} 
-              alt="Premium Sunset Resort Community" 
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" 
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-            <div className="absolute bottom-4 left-4 bg-black/85 backdrop-blur-sm border border-orange-500/20 px-3.5 py-1.5 rounded-lg text-[9px] uppercase tracking-widest text-orange-400 font-mono font-bold">
-              Scenic Resort Community
-            </div>
-          </motion.div>
+        <div className="relative z-10 mx-auto max-w-6xl px-4 grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 pt-0">
+
+          {/* Top Hero Image Column: Infrastructure Carousel */}
+          <HeroCarousel
+            images={[customHeroLeft, hero1_1, hero1_2, hero1_3, hero1_4, hero1_5, hero1_6]}
+            labels={["SK Farmland Community", "Gated Entry Plaza", "Premium Infrastructure", "Secure Boundary", "Eco-Friendly Design", "Scenic View", "Lush Greenery"]}
+            yBounce={[0, -6, 0]}
+          />
+
+          {/* Bottom Hero Image Column: Scenic/Community Carousel */}
+          <HeroCarousel
+            images={[customHeroRight, hero1_7, hero1_8, hero1_9, hero1_10, hero1_11]}
+            labels={["Premium Lifestyle", "Scenic Resort Community", "Lush Organic Farm", "Clubhouse & Amenities", "Serene Living Spaces", "Nature Living"]}
+            yBounce={[0, 6, 0]}
+          />
 
         </div>
       </section>
 
       {/* 2. Trust Stats Strip */}
-      <motion.section 
-        id="stats-section" 
+      <motion.section
+        id="stats-section"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.1 }}
         variants={sectionVariants}
         className="relative z-10 px-4"
       >
-        <div className="mx-auto max-w-5xl bg-[#090909] border border-zinc-900 rounded-2xl p-6 shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
-          <div className="text-center mb-5">
+        <div className="mx-auto max-w-6xl bg-[#090909] border border-zinc-900 rounded-2xl p-6 md:p-8 shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
+          <div className="text-left mb-6">
             <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-orange-500 font-mono">
               Our Legacy in Figures
             </span>
-            <h2 className="text-xl font-bold text-white tracking-tight mt-1">
-              Trusted by Families & Investors Near Bengaluru
+            <h2 className="text-2xl font-bold text-white tracking-tight mt-1">
+              Trusted by Families & Investors across India
             </h2>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-5 gap-6 text-center">
-            {statsData.map((stat, i) => (
-              <motion.div
-                key={i}
-                id={`stat-card-${i}`}
-                variants={itemVariants}
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                className="flex flex-col items-center p-4 bg-zinc-950/60 rounded-xl border border-zinc-900/60 hover:border-orange-500/30 hover:shadow-[0_0_15px_rgba(249,115,22,0.06)] transition-all duration-300"
-              >
-                <motion.div 
-                  animate={{ y: [0, -6, 0] }}
-                  transition={{ repeat: Infinity, duration: 3.5 + i * 0.5, ease: "easeInOut" }}
-                  className="p-3 bg-orange-500/5 rounded-full border border-orange-500/10 mb-3 text-orange-500"
+          <div className="w-full relative mt-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 py-2">
+              {statsData.map((stat, i) => (
+                <div
+                  key={i}
+                  className="flex flex-col items-center p-5 bg-zinc-950/60 rounded-xl border border-zinc-900/60 hover:border-orange-500/30 hover:shadow-[0_0_15px_rgba(249,115,22,0.06)] transition-all duration-300 w-full"
                 >
-                  {iconMap(stat.icon)}
-                </motion.div>
-                <span className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                  {stat.value}
-                </span>
-                <span className="text-[10px] sm:text-xs text-zinc-500 mt-1 uppercase font-semibold tracking-wide">
-                  {stat.label}
-                </span>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </motion.section>
-
-      {/* 3. Why Choose Us Section */}
-      <motion.section 
-        id="nature-living-section" 
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.1 }}
-        variants={sectionVariants}
-        className="mx-auto max-w-5xl px-4"
-      >
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          
-          {/* Left Column: Why Choose Us details */}
-          <div className="lg:col-span-7 space-y-5">
-            <div className="flex items-center gap-2">
-              <span className="h-[1px] w-8 bg-orange-500"></span>
-              <span className="text-xs font-bold uppercase tracking-[0.22em] text-orange-500 font-mono">
-                🌄 Why Choose Us
-              </span>
-            </div>
-
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight">
-              Why Choose SK Farmland Developers?
-            </h2>
-
-            <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
-              We bridge the gap between secure, legally cleared land ownership and natural organic countryside living near Bengaluru, operating with complete transparency and top-tier infrastructure.
-            </p>
-
-            {/* Why Choose Us 8-point checklist grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3.5 pt-2">
-              {[
-                '100% Clear Title Deeds',
-                'Legally Verified Documents',
-                'Excellent Road Connectivity',
-                'Borewell & Electricity Facility',
-                'Plantation Ready Farmland',
-                'Ideal for Investment, Farming & Weekend Living',
-                'Projects Near Bengaluru',
-                'Site Visit Assistance'
-              ].map((title, idx) => (
-                <div key={idx} className="flex items-start gap-2.5">
-                  <div className="mt-0.5 flex items-center justify-center w-4.5 h-4.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shrink-0">
-                    <Check size={10} className="stroke-[3]" />
-                  </div>
-                  <span className="text-xs font-bold text-zinc-200 tracking-wide leading-tight">
-                    {title}
+                  <motion.div
+                    animate={{ y: [0, -6, 0] }}
+                    transition={{ repeat: Infinity, duration: 3.5 + (i % statsData.length) * 0.5, ease: "easeInOut" }}
+                    className="p-3 bg-orange-500/5 rounded-full border border-orange-500/10 mb-3 text-orange-500"
+                  >
+                    {iconMap(stat.icon)}
+                  </motion.div>
+                  <span className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                    <AnimatedNumber value={stat.value} />
+                  </span>
+                  <span className="text-[10px] sm:text-xs text-zinc-500 mt-2 uppercase font-semibold tracking-wide text-center">
+                    {stat.label}
                   </span>
                 </div>
               ))}
             </div>
           </div>
-
-          {/* Right Column Graphic Card */}
-          <div ref={natureRef} className="lg:col-span-5 relative">
-            <div className="relative rounded-2xl overflow-hidden border border-zinc-900 group h-80">
-              <motion.img
-                src={gallery8}
-                alt="Winding path inside premium project"
-                referrerPolicy="no-referrer"
-                style={{ y: natureY }}
-                className="absolute -top-[15%] left-0 w-full h-[130%] object-cover object-center group-hover:scale-105 transition-all duration-700 opacity-80 filter brightness-95"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent pointer-events-none" />
-              
-              {/* Overlay Badge */}
-              <div className="absolute bottom-5 left-5 right-5 p-4 rounded-xl bg-black/85 backdrop-blur-md border border-orange-500/20 text-center">
-                <p className="text-[10px] text-orange-400 font-bold uppercase tracking-[0.2em] font-mono">
-                  Featured Project Image
-                </p>
-                <p className="text-xs text-zinc-200 font-medium mt-1">
-                  Ready-made Farmhouses & pathways under management
-                </p>
-              </div>
-            </div>
-            
-            {/* Background luxury accent */}
-            <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-orange-500/10 rounded-full blur-2xl z-[-1]" />
-          </div>
-
         </div>
-
-        {/* Bottom Details Row: Own Your Dream Farmland & Experience True Nature Living */}
-        <div className="border-t border-zinc-900/80 pt-8 mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 text-left z-10 relative">
-          {/* Own Your Dream Farmland */}
-          <div className="space-y-3">
-            <h4 className="text-sm font-bold text-orange-500 uppercase tracking-wide flex items-center gap-1.5 font-mono">
-              <span>🌿</span> Own Your Dream Farmland
-            </h4>
-            <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-mono font-bold">
-              Lifestyle | Investment | Extra Income Opportunity
-            </p>
-            <p className="text-xs text-zinc-400 leading-relaxed">
-              Premium farmland projects available near to Anekal Thalli Road towards Hoganekkal Road & which are very near to Electronic City, Jigani, Chandapur, Bannerghatta road, Kanakapura Road & Hosur (peaceful & high-growth location).
-            </p>
-            <p className="text-xs text-zinc-400 leading-relaxed">
-              At SK Farmland Developers, we offer farmland solutions designed for personal use, investment, and income generation. Whether you want peaceful living in nature or long-term returns, we make the process simple, secure, and transparent.
-            </p>
-          </div>
-
-          {/* Experience True Nature Living */}
-          <div className="space-y-3">
-            <h4 className="text-sm font-bold text-orange-500 uppercase tracking-wide flex items-center gap-1.5 font-mono">
-              <span>🌄</span> Experience True Nature Living
-            </h4>
-            <p className="text-xs text-zinc-400 leading-relaxed pt-1">
-              Imagine living far away from the hustle and bustle of the city — surrounded by pure nature, undisturbed, and completely free from pollution. Wake up to the sound of birds, breathe in fresh air, and enjoy wide open spaces where you can grow your own food, walk among greenery, and reconnect with a healthier lifestyle.
-            </p>
-            <p className="text-xs text-zinc-400 leading-relaxed">
-              Our farmland is ideal for cultivating crops such as mango, guava, papaya, banana, sugarcane, vegetables, and seasonal grains, supported by fertile soil and water availability. You can also keep animals like chickens, cows, dogs, sheep, goats, or birds, making your land not just an investment—but a complete countryside experience.
-            </p>
-          </div>
-        </div>
-
       </motion.section>
 
-      {/* 4. What We Offer Options */}
-      <motion.section 
-        id="what-we-offer-section" 
+      {/* Section 1: Own Your Dream Farmland */}
+      <motion.section
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.1 }}
         variants={sectionVariants}
-        className="mx-auto max-w-5xl px-4"
+        className="mx-auto max-w-6xl px-4 py-4 space-y-4 text-left"
       >
-        <div className="text-center space-y-3 mb-8">
-          <span className="text-xs font-bold uppercase tracking-[0.35em] text-orange-500 font-mono">
-            🌱 Tailored Solutions
-          </span>
-          <h2 className="text-3xl font-extrabold text-white tracking-tight">
-            What We Offer
-          </h2>
-          <p className="text-sm text-zinc-400 max-w-2xl mx-auto">
-            At SK Farmland Developers, we offer farmland solutions designed for personal use, investment, and steady income generation.
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-orange-500/10 rounded-full border border-orange-500/20 text-orange-400 font-mono text-xs uppercase tracking-widest">
+          <Leaf size={14} className="animate-pulse" />
+          Own Your Dream Farmland
+        </div>
+        <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight uppercase">
+          Lifestyle <span className="text-zinc-600 px-2">|</span> Investment <span className="text-zinc-600 px-2">|</span> Extra Income Opportunity
+        </h2>
+        <div className="space-y-4 text-sm sm:text-base text-zinc-400 leading-relaxed text-left max-w-4xl">
+          <p>
+            Premium farmland projects available near to Anekal Thalli Road towards Hoganekkal Road & which are very near to Electronic City, Jigani, Chandapur, Bannerghatta road, Kanakapura Road & Hosur (peaceful & high-growth location).
+          </p>
+          <p>
+            At SK Farmland Developers, we offer farmland solutions designed for personal use, investment, and income generation. Whether you want peaceful living in nature or long-term returns, we make the process simple, secure, and transparent.
           </p>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          
-          {/* Option 1: Farmland Plots */}
-          <motion.div
-            variants={itemVariants}
-            whileHover={{ y: -5 }}
-            className="bg-[#0A0A0A] border border-zinc-900 rounded-2xl p-6 relative flex flex-col justify-between hover:border-orange-500/35 hover:shadow-[0_0_20px_rgba(249,115,22,0.06)] transition-all duration-300"
-          >
-            <div>
-              <motion.div 
-                animate={{ y: [0, -6, 0] }}
-                transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-                className="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-500 mb-5 border border-orange-500/25"
-              >
-                <Compass size={18} />
-              </motion.div>
-              
-              <h3 className="text-lg font-bold text-white tracking-tight">🏡 Private Farmland Plots</h3>
-              <p className="text-xs text-orange-500 font-mono mt-1 uppercase tracking-wider font-semibold">
-                0.25, 0.5, or 1–2 Acres
-              </p>
-              
-              <p className="text-xs text-zinc-400 leading-relaxed mt-3">
-                Own exclusive agricultural plots with individual physical titles. Perfect for families looking to establish private organic food gardens or secure long-term capital assets.
-              </p>
-
-              <ul className="text-xs text-zinc-400 space-y-2.5 mt-5 border-t border-zinc-900/60 pt-4">
-                <li className="flex items-center gap-2">
-                  <span className="text-orange-500 text-sm">✔</span>
-                  <span>One Plot – One Owner – Complete Freedom</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-orange-500 text-sm">✔</span>
-                  <span>Individual Fencing Available</span>
-                </li>
-              </ul>
-            </div>
-            
-            <button
-              onClick={() => setActivePage('projects')}
-              className="mt-6 w-full py-2.5 bg-zinc-950 border border-zinc-800 hover:border-orange-500/40 hover:text-orange-500 text-zinc-300 rounded-lg text-xs font-semibold tracking-wider uppercase transition-colors duration-300 cursor-pointer"
-            >
-              View Available Plots
-            </button>
-          </motion.div>
-
-          {/* Option 2: Managed Farmland (Hassle-Free) */}
-          <motion.div
-            variants={itemVariants}
-            whileHover={{ y: -5 }}
-            className="bg-[#0C0804] border border-orange-500/30 rounded-2xl p-6 relative flex flex-col justify-between shadow-[0_4px_25px_rgba(249,115,22,0.05)] hover:border-orange-500/50 hover:shadow-[0_0_25px_rgba(249,115,22,0.1)] transition-all duration-300"
-          >
-            <div>
-              <div className="absolute top-4 right-4 bg-orange-500 text-black text-[9px] font-bold font-mono px-2 py-0.5 rounded-full uppercase tracking-widest">
-                Popular
-              </div>
-              
-              <motion.div 
-                animate={{ y: [0, -6, 0] }}
-                transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut" }}
-                className="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-500 mb-5 border border-orange-500/35"
-              >
-                <Leaf size={18} />
-              </motion.div>
-              
-              <h3 className="text-lg font-bold text-white tracking-tight">🌾 Managed Farmland</h3>
-              <p className="text-xs text-orange-500 font-mono mt-1 uppercase tracking-wider font-semibold">
-                Hassle-Free Asset Management
-              </p>
-              
-              <p className="text-xs text-zinc-400 leading-relaxed mt-3">
-                A worry-free plantation investment where basic upkeep, drip irrigation, fencing, access, and 24/7 boundary security are fully handled by our dedicated team.
-              </p>
-
-              <ul className="text-xs text-zinc-400 space-y-2.5 mt-5 border-t border-zinc-800/60 pt-4">
-                <li className="flex items-center gap-2">
-                  <span className="text-orange-500 text-sm">✔</span>
-                  <span>35 plants with automated drip</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-orange-500 text-sm">✔</span>
-                  <span>Cement roads & solar street lamps</span>
-                </li>
-              </ul>
-            </div>
-            
-            <button
-              onClick={() => setActivePage('managed')}
-              className="mt-6 w-full py-2.5 bg-orange-600 text-white font-bold rounded-lg text-xs tracking-wider uppercase hover:bg-orange-500 transition-colors duration-300 cursor-pointer"
-            >
-              Explore Managed Features
-            </button>
-          </motion.div>
-
-          {/* Option 3: Plain Farmland */}
-          <motion.div
-            variants={itemVariants}
-            whileHover={{ y: -5 }}
-            className="bg-[#0A0A0A] border border-zinc-900 rounded-2xl p-6 relative flex flex-col justify-between hover:border-orange-500/35 hover:shadow-[0_0_20px_rgba(249,115,22,0.06)] transition-all duration-300"
-          >
-            <div>
-              <motion.div 
-                animate={{ y: [0, -6, 0] }}
-                transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-                className="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-500 mb-5 border border-orange-500/25"
-              >
-                <Award size={18} />
-              </motion.div>
-              
-              <h3 className="text-lg font-bold text-white tracking-tight">🌿 Plain Farmland</h3>
-              <p className="text-xs text-orange-500 font-mono mt-1 uppercase tracking-wider font-semibold">
-                Without Development
-              </p>
-              
-              <p className="text-xs text-zinc-400 leading-relaxed mt-3">
-                Highly budget-friendly pristine agricultural land plots. Gives you complete freedom to design your farmhouse layouts and plantations from scratch.
-              </p>
-
-              <ul className="text-xs text-zinc-400 space-y-2.5 mt-5 border-t border-zinc-900/60 pt-4">
-                <li className="flex items-center gap-2">
-                  <span className="text-orange-500 text-sm">✔</span>
-                  <span>Budget-friendly land options</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-orange-500 text-sm">✔</span>
-                  <span>Freedom to build over time</span>
-                </li>
-              </ul>
-            </div>
-            
-            <button
-              onClick={() => setActivePage('projects')}
-              className="mt-6 w-full py-2.5 bg-zinc-950 border border-zinc-800 hover:border-orange-500/40 hover:text-orange-500 text-zinc-300 rounded-lg text-xs font-semibold tracking-wider uppercase transition-colors duration-300 cursor-pointer"
-            >
-              Explore Plain Land
-            </button>
-          </motion.div>
-
-        </div>
       </motion.section>
 
-      {/* 5. Income Generator Section */}
-      <motion.section 
-        id="income-generation-section" 
+      {/* Section 2: Experience True Nature Living */}
+      <motion.section
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.1 }}
         variants={sectionVariants}
-        className="mx-auto max-w-5xl px-4 bg-[#080808] border border-zinc-900 rounded-3xl p-6 md:p-10 relative overflow-hidden"
+        className="mx-auto max-w-6xl px-4 py-4"
       >
-        
-        {/* Ambient top glowing line */}
-        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-orange-500/40 to-transparent" />
-        
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          
-          <div className="lg:col-span-5 space-y-5">
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-orange-500 font-mono">
-              💰 Lifestyle Asset + Income
-            </span>
-            
-            <h2 className="text-3xl font-extrabold text-white tracking-tight">
-              Earn Steady Income From Your Farmland
+        <div className="bg-zinc-950 border border-zinc-800/80 rounded-2xl p-6 md:p-10 hover:border-orange-500/30 transition-colors shadow-2xl relative overflow-hidden">
+          <div className="absolute -top-40 -right-40 w-80 h-80 bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-6 flex items-center gap-3">
+            <span className="text-2xl">🌄</span> Experience True Nature Living
+          </h2>
+          <div className="space-y-5 text-sm sm:text-base text-zinc-400 leading-relaxed relative z-10">
+            <p>Imagine living far away from the hustle and bustle of the city — surrounded by pure nature, undisturbed, and completely free from pollution.</p>
+            <p>Wake up to the sound of birds, breathe in fresh air, and enjoy wide open spaces where you can grow your own food, walk among greenery, and reconnect with a healthier lifestyle.</p>
+            <p>Our farmland is ideal for cultivating crops such as mango, guava, papaya, banana, sugarcane, vegetables, and seasonal grains, supported by fertile soil and water availability.</p>
+            <p>You can also keep animals like chickens, cows, dogs, sheep, goats, or birds, making your land not just an investment—but a complete countryside experience.</p>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Section 3: What We Offer */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+        variants={sectionVariants}
+        className="mx-auto max-w-6xl px-4 py-6 space-y-6"
+      >
+        <div className="text-left space-y-3">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight flex items-center gap-3">
+            <span className="text-2xl">🌱</span> What We Offer
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-6 hover:border-orange-500/40 transition-colors">
+            <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+              🏡 Farmland
+            </h3>
+            <div className="h-px w-full bg-zinc-800 my-4" />
+            <p className="text-sm text-zinc-300 font-semibold mb-4">
+              Plot Size Starts From 0.25 Quarter Acre, 0.5 Half Acre, or 1–2 Acres)
+            </p>
+            <p className="text-orange-400 font-mono text-xs font-bold uppercase tracking-wider">
+              One Plot – One Owner – Complete Freedom
+            </p>
+          </div>
+
+          <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 border border-orange-500/30 rounded-2xl p-6 shadow-[0_0_20px_rgba(249,115,22,0.1)] relative">
+            <div className="absolute top-0 right-6 -translate-y-1/2 bg-orange-500 text-black text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full">
+              Hassle-Free Option
+            </div>
+            <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+              🌾 Managed Farmland
+            </h3>
+            <div className="h-px w-full bg-zinc-800 my-4" />
+            <ul className="space-y-3 text-sm text-zinc-400">
+              {['Maintenance, plantation & basic upkeep handled', '35 plants with drip irrigation system', 'Individual water connection for each plot', 'Picket compound fencing in front of each plot for better layout appearance', '24/7 security', 'Internal Access Road', 'Cement Concrete Roads', 'Solar street lights', 'Ideal for investment without daily involvement'].map((f, i) => (
+                <li key={i} className="flex gap-2 items-start">
+                  <Check size={16} className="text-orange-500 shrink-0 mt-0.5" />
+                  <span className="leading-tight">{f}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-6 hover:border-orange-500/40 transition-colors">
+            <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+              🌿 Plain Farmland
+            </h3>
+            <p className="text-xs text-zinc-500 uppercase tracking-widest mb-2">(Without Development)</p>
+            <div className="h-px w-full bg-zinc-800 my-4" />
+            <ul className="space-y-3 text-sm text-zinc-400">
+              {['Budget-friendly land options', 'Freedom to develop as per your choice', 'Suitable for long-term investment and future development'].map((f, i) => (
+                <li key={i} className="flex gap-2 items-start">
+                  <Check size={16} className="text-orange-500 shrink-0 mt-0.5" />
+                  <span className="leading-tight">{f}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Section 4: Value and Pricing */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+        variants={sectionVariants}
+        className="mx-auto max-w-6xl px-4 py-6"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2 bg-[#090909] border border-zinc-800/80 rounded-2xl p-6 md:p-8 hover:border-orange-500/30 transition-colors">
+            <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+              <span className="text-2xl">💰</span> Earn Income From Your Farmland
             </h2>
-            
-            <p className="text-xs md:text-sm text-zinc-400 leading-relaxed">
-              Why let your investment sit idle? SK Farmland Developers provides complete structural layouts to easily turn your countryside escape into an extra income engine.
-            </p>
-
-            {/* Price badge */}
-            <div className="p-4 rounded-xl bg-black border border-zinc-800 space-y-1">
-              <p className="text-[10px] text-zinc-500 uppercase tracking-widest font-mono">Current Investment Range</p>
-              <p className="text-lg md:text-xl font-bold text-orange-400">₹499/- to ₹849/- <span className="text-xs font-normal text-zinc-400">per sq.ft</span></p>
-              <p className="text-[9px] text-zinc-600 font-mono">(Price subject to change based on project and specific location)</p>
+            <ul className="space-y-4 text-sm sm:text-base text-zinc-400 mb-6">
+              <li className="flex gap-3 items-start">
+                <span className="text-orange-500 mt-1">👉</span>
+                <span>Build your farmhouse as per your budget & style</span>
+              </li>
+              <li className="flex gap-3 items-start">
+                <span className="text-orange-500 mt-1">👉</span>
+                <span>Build your Dream FARM HOUSE & earn extra income with platforms like Airbnb or farm stay</span>
+              </li>
+              <li className="flex gap-3 items-start">
+                <span className="text-orange-500 mt-1">👉</span>
+                <span>Generate rental income from weekend stays & tourists</span>
+              </li>
+            </ul>
+            <div className="inline-block px-4 py-2 bg-orange-500/10 border border-orange-500/20 text-orange-400 rounded-lg text-sm font-semibold">
+              Turn your farmland into a lifestyle asset + income source.
             </div>
           </div>
 
-          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {incomeGenerators.map((gen, i) => (
-              <div
-                key={i}
-                className="bg-zinc-950 border border-zinc-900/80 rounded-xl p-5 hover:border-orange-500/20 transition-all duration-300 space-y-3"
-              >
-                <div className="flex items-center gap-3">
-                  <span className="w-8 h-8 rounded-full bg-orange-500/5 text-orange-500 flex items-center justify-center border border-orange-500/10">
-                    {gen.icon === 'Home' && <HomeIcon size={14} />}
-                    {gen.icon === 'TrendingUp' && <TrendingUp size={14} />}
-                    {gen.icon === 'Leaf' && <Leaf size={14} />}
-                    {gen.icon === 'DollarSign' && <DollarSign size={14} />}
-                  </span>
-                  <h4 className="text-sm font-bold text-zinc-100 tracking-tight">{gen.title}</h4>
-                </div>
-                <p className="text-xs text-zinc-400 leading-relaxed">{gen.desc}</p>
-              </div>
-            ))}
+          <div className="bg-gradient-to-br from-orange-900/40 to-black border border-orange-500/30 rounded-2xl p-6 md:p-8 shadow-[0_0_20px_rgba(249,115,22,0.1)] flex flex-col justify-center text-center">
+            <h2 className="text-xl font-bold text-white mb-6 flex items-center justify-center gap-2">
+              <span className="text-xl">💵</span> Investment Range
+            </h2>
+            <div className="text-2xl md:text-3xl font-extrabold text-orange-400 tracking-tight mb-2 flex justify-center items-center gap-2">
+              👉 ₹499/- to ₹849/- <span className="text-sm font-medium text-zinc-400">per sq.ft</span>
+            </div>
+            <p className="text-[10px] sm:text-xs text-zinc-500 font-mono mt-4">
+              (Price subject to change based on project and location)
+            </p>
           </div>
 
+          <div className="lg:col-span-3 bg-zinc-950 border border-zinc-800 rounded-2xl p-6 md:p-8">
+            <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+              <span className="text-2xl">🏡</span> Why Choose SK Farmland Developers
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm text-zinc-400">
+              {['100% Clear Title & Legal Verification', 'Options: Private, Managed & Plain Land', 'Projects available near Bangalore & Pondicherry', 'Prime locations with good road connectivity', 'Transparent & hassle-free process', 'Complete guidance from booking to registration'].map((f, i) => (
+                <div key={i} className="flex gap-2 items-start">
+                  <Check size={18} className="text-orange-500 shrink-0" />
+                  <span className="leading-tight">{f}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </motion.section>
 
-      {/* 6. Ready to start journey CTA Card */}
-      <section id="home-cta-banner" className="mx-auto max-w-5xl px-4 text-center">
-        <div className="py-8 px-6 rounded-2xl bg-gradient-to-tr from-zinc-950 via-[#100D09] to-zinc-950 border border-orange-500/25 space-y-4 shadow-[0_5px_30px_rgba(249,115,22,0.06)]">
-          <span className="text-xs font-bold uppercase tracking-[0.3em] text-orange-500 font-mono">
-            📍 Start Your Journey Today
-          </span>
-          
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-            Ready to Experience True Nature Living?
-          </h2>
-          
-          <p className="text-xs sm:text-sm text-zinc-400 max-w-2xl mx-auto leading-relaxed">
-            Contact us today for more information, detailed floor plans, and customized farm layouts. We arrange comfortable, free transport with complete on-site guidance.
-          </p>
+      {/* Section 5: Experience & CTA */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+        variants={sectionVariants}
+        className="mx-auto max-w-6xl px-4 py-6"
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="bg-[#090909] border border-zinc-800 rounded-2xl p-8 flex flex-col justify-center">
+            <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+              <span className="text-2xl">🌄</span> Experience Nature Your Way
+            </h2>
+            <ul className="space-y-4 text-sm md:text-base text-zinc-300">
+              <li>Build your dream farmhouse 🏡</li>
+              <li>Enjoy peaceful weekend living 🌿</li>
+              <li>Earn rental income 💰</li>
+              <li>Invest in appreciating land 📈</li>
+            </ul>
+            <p className="text-orange-400 font-semibold mt-6 uppercase tracking-wider text-sm">
+              Choose managed farmland for worry-free ownership
+            </p>
+          </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto pt-2">
+          <div className="bg-gradient-to-tr from-zinc-900 to-zinc-950 border border-orange-500/30 rounded-2xl p-8 flex flex-col justify-center items-center text-center shadow-[0_5px_30px_rgba(249,115,22,0.06)] relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/5 rounded-full blur-3xl pointer-events-none" />
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-orange-500 font-mono mb-4">
+              📍 Start Your Journey Today
+            </span>
+            <div className="space-y-4 w-full max-w-sm mb-6 flex flex-col items-center">
+              <div className="flex items-center gap-3 text-white text-sm md:text-base font-semibold">
+                <span className="text-orange-500">👉</span> Explore our projects
+              </div>
+              <div className="flex items-center gap-3 text-white text-sm md:text-base font-semibold">
+                <span className="text-orange-500">👉</span> Book a site Visit
+              </div>
+              <div className="flex items-center gap-3 text-white text-sm md:text-base font-semibold text-left">
+                <span className="text-orange-500">👉</span> Choose the farmland that suits your needs
+              </div>
+            </div>
+
             <button
               onClick={onBookClick}
-              className="w-full sm:w-auto flex items-center justify-center gap-2 bg-gradient-to-r from-orange-600 to-amber-500 text-white font-bold uppercase tracking-wider text-xs px-6 py-3.5 rounded-full hover:from-orange-500 hover:to-amber-400 transition-all duration-300 cursor-pointer shadow-[0_4px_15px_rgba(249,115,22,0.2)]"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 bg-gradient-to-r from-orange-600 to-amber-500 text-white font-bold uppercase tracking-wider text-sm px-8 py-4 rounded-full hover:from-orange-500 hover:to-amber-400 transition-all duration-300 shadow-[0_4px_15px_rgba(249,115,22,0.2)] cursor-pointer"
             >
-              <Calendar size={13} />
+              <Calendar size={16} />
               Book Free Site Visit
-            </button>
-            
-            <button
-              onClick={() => setActivePage('journey')}
-              className="w-full sm:w-auto flex items-center justify-center gap-1.5 text-zinc-300 hover:text-white hover:underline text-xs font-bold uppercase tracking-wider transition-all cursor-pointer"
-            >
-              Learn the buying process
-              <ArrowRight size={13} className="text-orange-500" />
             </button>
           </div>
         </div>
-      </section>
+      </motion.section>
+
+      {/* Projects Section */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+        variants={sectionVariants}
+        className="mx-auto max-w-6xl px-4 py-6 space-y-6"
+      >
+        <div className="text-left space-y-3">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+            Projects
+          </h2>
+          <p className="text-sm sm:text-base text-zinc-400 max-w-3xl leading-relaxed">
+            Experience premium farmland living with thoughtfully planned infrastructure, natural surroundings, and modern amenities.
+          </p>
+        </div>
+
+        <div className="bg-[#090909] border border-zinc-800 rounded-2xl p-6 md:p-10 shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
+          <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6">Project 1</h3>
+          
+          <div className="mb-8">
+            <HeroCarousel
+              images={[project1_1, project1_2, project1_3, project1_4, project1_5, project1_6, project1_7, project1_8]}
+              labels={Array(8).fill("Project 1")}
+              yBounce={[0, 0, 0]}
+              className="!aspect-[21/9] max-h-[500px]"
+            />
+          </div>
+
+          <div className="space-y-6">
+            <h4 className="text-xl font-bold text-orange-500 flex items-center gap-2">
+              🌿 Project Highlights
+            </h4>
+            
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm md:text-base text-zinc-300">
+              <li className="flex items-start gap-2"><Check className="text-orange-500 w-5 h-5 shrink-0 mt-0.5" /> 350 Acres of premium farmland with 550 plots available in various sizes.</li>
+              <li className="flex items-start gap-2"><Check className="text-orange-500 w-5 h-5 shrink-0 mt-0.5" /> Grand entrance arch with an elegant main gate.</li>
+              <li className="flex items-start gap-2"><Check className="text-orange-500 w-5 h-5 shrink-0 mt-0.5" /> 24×7 security for a safe and secure environment.</li>
+              <li className="flex items-start gap-2"><Check className="text-orange-500 w-5 h-5 shrink-0 mt-0.5" /> Individual water connection provided to every plot.</li>
+              <li className="flex items-start gap-2"><Check className="text-orange-500 w-5 h-5 shrink-0 mt-0.5" /> Wide cement concrete main roads and well-laid internal roads.</li>
+              <li className="flex items-start gap-2"><Check className="text-orange-500 w-5 h-5 shrink-0 mt-0.5" /> Street lighting throughout the project.</li>
+              <li className="flex items-start gap-2"><Check className="text-orange-500 w-5 h-5 shrink-0 mt-0.5" /> Front picket compound fencing provided for every plot.</li>
+              <li className="flex items-start gap-2"><Check className="text-orange-500 w-5 h-5 shrink-0 mt-0.5" /> 
+                <div>
+                  <span className="font-semibold text-white">4-Acre Clubhouse featuring:</span>
+                  <ul className="ml-4 mt-2 space-y-1 text-zinc-400">
+                    <li>• Indoor &amp; outdoor games</li>
+                    <li>• Horse riding</li>
+                    <li>• Restaurant</li>
+                    <li>• Temple and peaceful meditation hall.</li>
+                  </ul>
+                </div>
+              </li>
+              <li className="flex items-start gap-2"><Check className="text-orange-500 w-5 h-5 shrink-0 mt-0.5" /> Plantation of 40+ varieties of trees, including Mango, Sapota, Jackfruit, Coconut, Teak, Silver Oak, and more.</li>
+              <li className="flex items-start gap-2"><Check className="text-orange-500 w-5 h-5 shrink-0 mt-0.5" /> Organic farming guidance and support to help you cultivate your own produce.</li>
+              <li className="flex items-start gap-2"><Check className="text-orange-500 w-5 h-5 shrink-0 mt-0.5" /> Close to popular tourist attractions like Muthyala Maduvu Waterfalls (Pearl Valley) and Pearl Valley Dam.</li>
+              <li className="flex items-start gap-2"><Check className="text-orange-500 w-5 h-5 shrink-0 mt-0.5" /> Peaceful environment surrounded by beautiful mountain views.</li>
+              <li className="flex items-start gap-2"><Check className="text-orange-500 w-5 h-5 shrink-0 mt-0.5" /> Excellent connectivity to Anekal, Chandapura, Electronic City, Bannerghatta Road, Kanakapura Road, and Hosur.</li>
+            </ul>
+
+            <div className="mt-8 p-6 bg-zinc-950/80 border border-zinc-800 rounded-xl flex flex-col md:flex-row gap-6 justify-between items-center">
+              <div>
+                <h5 className="text-lg font-bold text-white mb-1">Pricing</h5>
+                <p className="text-orange-400 font-semibold text-xl">₹849 per sq. ft. <span className="text-sm text-zinc-500 font-normal">(Slightly Negotiable)</span></p>
+              </div>
+              <div className="text-left md:text-right">
+                <h5 className="text-lg font-bold text-white mb-1">Bank Loan</h5>
+                <p className="text-zinc-400 font-medium">Not Available</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.section>
 
     </motion.div>
   );

@@ -13,16 +13,16 @@ export default function Footer({ setActivePage, onBookClick }: FooterProps) {
   return (
     <footer id="main-footer" className="bg-[#050505] border-t border-zinc-900 pt-16 pb-20 lg:pb-8 text-zinc-400">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        
+
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-          
+
           {/* Brand & Description Column */}
           <div id="footer-brand-column" className="space-y-4">
             <div className="flex items-center">
               <Logo className="w-13 h-13" showText={true} />
             </div>
-            
+
             <p className="text-xs text-zinc-400 leading-relaxed pt-2">
               Premium, high-yield managed and plain farmland projects near Bengaluru. We simplify farmland investments with clear titles, 24/7 security, and comprehensive legal verification.
             </p>
@@ -120,7 +120,7 @@ export default function Footer({ setActivePage, onBookClick }: FooterProps) {
             <h4 className="text-xs uppercase font-bold tracking-[0.3em] text-white font-mono border-l-2 border-orange-500 pl-3">
               Direct Contact
             </h4>
-            
+
             <div className="space-y-3.5 text-xs text-zinc-400">
               <a href="tel:+919900078600" className="flex items-center gap-3 hover:text-orange-500 transition-colors">
                 <span className="text-orange-500">
@@ -128,14 +128,14 @@ export default function Footer({ setActivePage, onBookClick }: FooterProps) {
                 </span>
                 <span>+91 99000 78600</span>
               </a>
-              
+
               <a href="mailto:info@skfarmlands.com" className="flex items-center gap-3 hover:text-orange-500 transition-colors">
                 <span className="text-orange-500">
                   <Mail size={14} />
                 </span>
                 <span>info@skfarmlands.com</span>
               </a>
-              
+
               <div className="flex items-start gap-3">
                 <span className="text-orange-500 mt-0.5">
                   <MapPin size={14} />
@@ -160,12 +160,12 @@ export default function Footer({ setActivePage, onBookClick }: FooterProps) {
 
         {/* Bottom Bar containing legal content requested */}
         <div id="footer-bottom-bar" className="border-t border-zinc-900/60 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          
+
           <div className="text-center md:text-left space-y-2">
             <p className="text-[10px] text-zinc-500 uppercase tracking-widest font-mono">
               © {currentYear} SK Farmland Developers. All Rights Reserved.
             </p>
-            
+
             {/* Footer Bottom Links Grouped cleanly on the left to prevent WhatsApp button overlap */}
             <div id="footer-bottom-links" className="flex flex-wrap items-center justify-center md:justify-start gap-x-3 gap-y-1 text-xs text-zinc-500">
               <button
