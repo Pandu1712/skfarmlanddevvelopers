@@ -122,18 +122,18 @@ export default function Footer({ setActivePage, onBookClick }: FooterProps) {
             </h4>
 
             <div className="space-y-3.5 text-xs text-zinc-400">
-              <a href="tel:+919900078600" className="flex items-center gap-3 hover:text-orange-500 transition-colors">
-                <span className="text-orange-500">
-                  <Phone size={14} />
+              <a href="tel:+917411131002" className="flex items-center gap-3 hover:text-orange-500 transition-colors">
+                <span className="w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center shrink-0">
+                  <Phone size={18} className="text-orange-500" />
                 </span>
-                <span>+91 99000 78600</span>
+                <span>+91 74111 31002</span>
               </a>
 
-              <a href="mailto:info@skfarmlands.com" className="flex items-center gap-3 hover:text-orange-500 transition-colors">
-                <span className="text-orange-500">
-                  <Mail size={14} />
+              <a href="mailto:info@skfarmlanddevelopers.com" className="flex items-center gap-3 hover:text-orange-500 transition-colors">
+                <span className="w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center shrink-0">
+                  <Mail size={18} className="text-orange-500" />
                 </span>
-                <span>info@skfarmlands.com</span>
+                <span>info@skfarmlanddevelopers.com</span>
               </a>
 
               <div className="flex items-start gap-3">

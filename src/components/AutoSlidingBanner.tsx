@@ -23,10 +23,8 @@ export default function AutoSlidingBanner({ onClose }: AutoSlidingBannerProps) {
   }, []);
 
   const handleWhatsAppRedirect = () => {
-    const message = encodeURIComponent(
-      'Hi SK Farmland Developers, I am interested in booking a site visit for this weekend. Please share more details.'
-    );
-    window.open(`https://wa.me/919900078600?text=${message}`, '_blank');
+    const message = encodeURIComponent("Hi SK Farmland Developers, I am interested in knowing more about the massive 350-acre new launch project at Anekal Thalli Road. Please share pricing and details.");
+    window.open(`https://wa.me/917411131002?text=${message}`, '_blank');
   };
 
   return (

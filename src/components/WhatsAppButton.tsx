@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 
 export default function WhatsAppButton() {
-  const whatsappNumber = '919900078600'; // Default placeholder premium number for Bengaluru farmlands
+  const whatsappNumber = '917411131002'; // Default placeholder premium number for Bengaluru farmlands
   const message = encodeURIComponent(
     'Hi SK Farmland Developers, I am interested in booking a site visit and exploring your premium farmland projects near Bengaluru. Please share more details.'
   );

@@ -460,7 +460,7 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
               <button
                 onClick={() => {
                   const message = encodeURIComponent('Hi SK Farmland Developers, I am interested in your projects. Please share more details.');
-                  window.open(`https://wa.me/919900078600?text=${message}`, '_blank');
+                  window.open(`https://wa.me/917411131002?text=${message}`, '_blank');
                 }}
                 className="flex-1 flex items-center justify-center gap-2 bg-[#14532d] hover:bg-[#166534] text-white font-bold uppercase tracking-wider text-sm px-8 py-4 rounded-full transition-all duration-300 shadow-[0_4px_15px_rgba(20,83,45,0.2)] cursor-pointer border border-emerald-800/30"
               >
@@ -554,7 +554,7 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
               <button
                 onClick={() => {
                   const message = encodeURIComponent('Hi SK Farmland Developers, I am interested in getting the price details for "Project 1". Please share the pricing information.');
-                  window.open(`https://wa.me/919900078600?text=${message}`, '_blank');
+                  window.open(`https://wa.me/917411131002?text=${message}`, '_blank');
                 }}
                 className="flex items-center justify-center gap-2 bg-[#14532d] hover:bg-[#166534] text-white font-bold uppercase tracking-wider px-8 py-4 rounded-xl transition-all shadow-[0_8px_20px_rgba(20,83,45,0.3)] cursor-pointer border border-emerald-800/30"
               >

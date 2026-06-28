@@ -140,7 +140,7 @@ export default function Projects({ onBookClick }: ProjectsProps) {
             <button
               onClick={() => {
                 const message = encodeURIComponent('Hi SK Farmland Developers, I am interested in getting the price details for "Project 1". Please share the pricing information.');
-                window.open(`https://wa.me/919900078600?text=${message}`, '_blank');
+                window.open(`https://wa.me/917411131002?text=${message}`, '_blank');
               }}
               className="flex items-center justify-center gap-2 bg-[#14532d] hover:bg-[#166534] text-white font-bold uppercase tracking-wider px-8 py-4 rounded-xl transition-all shadow-[0_8px_20px_rgba(20,83,45,0.3)] cursor-pointer border border-emerald-800/30"
             >

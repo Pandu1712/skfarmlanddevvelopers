@@ -1,12 +1,12 @@
 import { Phone } from 'lucide-react';
 
 export default function MobileContactBar() {
-  const whatsappNumber = '919900078600';
+  const whatsappNumber = '917411131002';
   const message = encodeURIComponent(
-    'Hi SK Farmland Developers, I am interested in booking a site visit and exploring your premium farmland projects near Bengaluru. Please share more details.'
+    'Hi SK Farmland Developers, I am interested in knowing more about your available farmland plots. Please share details.'
   );
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
-  const phoneUrl = 'tel:+919900078600';
+  const phoneUrl = 'tel:+917411131002';
 
   return (
     <div 

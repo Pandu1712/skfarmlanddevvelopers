@@ -260,9 +260,9 @@ export default function Contact({ onBookClick }: ContactProps) {
                     <Phone size={14} />
                   </span>
                   <div>
-                    <h5 className="font-bold text-zinc-200">Call/WhatsApp Contacts</h5>
-                    <p className="mt-1 font-semibold text-zinc-300">
-                      +91 99000 78600 / +91 99000 78601
+                    <h3 className="text-white font-bold mb-1">Phone Number</h3>
+                    <p className="text-zinc-400 text-sm">
+                      +91 74111 31002
                     </p>
                     <p className="text-[10px] text-zinc-500 mt-0.5">(Available 24/7 for urgent layout bookings)</p>
                   </div>
@@ -273,9 +273,9 @@ export default function Contact({ onBookClick }: ContactProps) {
                     <Mail size={14} />
                   </span>
                   <div>
-                    <h5 className="font-bold text-zinc-200">Email Desks</h5>
-                    <p className="mt-1 font-semibold text-zinc-300">
-                      info@skfarmlands.com / registry@skfarmlands.com
+                    <h3 className="text-white font-bold mb-1">Email Address</h3>
+                    <p className="text-zinc-400 text-sm">
+                      info@skfarmlanddevelopers.com
                     </p>
                   </div>
                 </div>
