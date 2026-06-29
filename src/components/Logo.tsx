@@ -15,7 +15,7 @@ export default function Logo({ className = 'w-16 h-16', showText = true, animate
   
   // Define dimensions to maintain original logo aspect ratio (approx 3:2)
   const sizeClasses = isLarge 
-    ? 'w-[315px] h-[210px] rounded-xl border-2' 
+    ? 'w-[240px] h-[160px] sm:w-[270px] sm:h-[180px] rounded-xl border-2' 
     : 'w-[66px] h-[44px] md:w-[87px] md:h-[58px] rounded-md border';
 
   const containerVariants = {

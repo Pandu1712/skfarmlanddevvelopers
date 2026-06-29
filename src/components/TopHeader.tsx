@@ -60,9 +60,9 @@ export default function TopHeader({ onClose }: TopHeaderProps) {
                 {lines[index].isLink ? (
                   <button
                     onClick={handleWhatsAppRedirect}
-                    className="text-xs sm:text-sm md:text-2xl font-black uppercase tracking-wider text-white hover:scale-105 transition-transform cursor-pointer flex items-center gap-2 leading-tight"
+                    className="text-[10px] sm:text-xs md:text-lg lg:text-xl font-black uppercase tracking-wider text-white hover:scale-105 transition-transform cursor-pointer flex items-center gap-2 leading-tight"
                     style={{
-                      textShadow: '-1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px 1.5px 0 #000, 3px 3px 0 #000',
+                      textShadow: '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 2px 2px 0 #000',
                       fontFamily: 'Impact, "Arial Black", sans-serif'
                     }}
                   >
@@ -70,9 +70,9 @@ export default function TopHeader({ onClose }: TopHeaderProps) {
                   </button>
                 ) : (
                   <span
-                    className="text-xs sm:text-sm md:text-2xl font-black uppercase tracking-wider text-white leading-tight"
+                    className="text-[10px] sm:text-xs md:text-lg lg:text-xl font-black uppercase tracking-wider text-white leading-tight"
                     style={{
-                      textShadow: '-1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px 1.5px 0 #000, 3px 3px 0 #000',
+                      textShadow: '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 2px 2px 0 #000',
                       fontFamily: 'Impact, "Arial Black", sans-serif'
                     }}
                   >

@@ -211,12 +211,12 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
               {statsData.map((stat, i) => (
                 <div
                   key={i}
-                  className="flex flex-col items-center p-5 bg-zinc-950/60 rounded-xl border-2 border-orange-600 hover:border-orange-500 hover:shadow-[0_0_15px_rgba(249,115,22,0.06)] transition-all duration-300 w-full"
+                  className="flex flex-col items-center p-5 bg-zinc-950/60 rounded-xl border-2 border-amber-500 hover:border-amber-400 hover:shadow-[0_0_15px_rgba(245,158,11,0.15)] transition-all duration-300 w-full"
                 >
                   <motion.div
                     animate={{ y: [0, -6, 0] }}
                     transition={{ repeat: Infinity, duration: 3.5 + (i % statsData.length) * 0.5, ease: "easeInOut" }}
-                    className="p-3 bg-orange-500/5 rounded-full border border-orange-500/10 mb-3 text-orange-500"
+                    className="p-3 bg-amber-500/10 rounded-full border border-amber-500/30 mb-3 text-amber-500"
                   >
                     {iconMap(stat.icon)}
                   </motion.div>
