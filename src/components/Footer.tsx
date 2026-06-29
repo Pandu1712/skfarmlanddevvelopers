@@ -27,10 +27,7 @@ export default function Footer({ setActivePage, onBookClick }: FooterProps) {
               Premium, high-yield managed and plain farmland projects near Bengaluru. We simplify farmland investments with clear titles, 24/7 security, and comprehensive legal verification.
             </p>
 
-            <div className="flex items-center gap-2 pt-2 text-xs">
-              <span className="inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
-              <span className="text-zinc-500 font-medium">Verified RERA & Legal Process</span>
-            </div>
+
           </div>
 
           {/* Quick Links */}

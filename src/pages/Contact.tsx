@@ -282,23 +282,6 @@ export default function Contact({ onBookClick }: ContactProps) {
               </div>
             </div>
 
-            {/* Visit guidelines */}
-            <div className="bg-gradient-to-br from-zinc-950 via-[#0F0D09] to-zinc-950 border border-orange-500/20 rounded-2xl p-6 space-y-4">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-orange-400 font-mono flex items-center gap-1.5">
-                <Sparkles size={11} className="text-orange-500 animate-pulse" />
-                Free Transport assistance
-              </span>
-              <h4 className="text-sm font-bold text-white tracking-tight">Book Gated Layout site visit</h4>
-              <p className="text-xs text-zinc-400 leading-relaxed">
-                We organize free air-conditioned transport shuttles directly from your doorstep to our project sites near Bengaluru on Saturdays and Sundays. Bring your family for an organic farm lunch on us!
-              </p>
-              <button
-                onClick={onBookClick}
-                className="w-full py-2.5 bg-orange-600 hover:bg-orange-500 text-white text-xs font-bold uppercase tracking-widest rounded-lg transition-all shadow-md cursor-pointer"
-              >
-                Book Pickup Slot Now
-              </button>
-            </div>
 
           </div>
 

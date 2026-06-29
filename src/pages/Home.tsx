@@ -34,9 +34,10 @@ interface HeroCarouselProps {
   labels: string[];
   yBounce: number[];
   className?: string;
+  children?: React.ReactNode;
 }
 
-function HeroCarousel({ images, labels, yBounce, className = "" }: HeroCarouselProps) {
+function HeroCarousel({ images, labels, yBounce, className = "", children }: HeroCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -66,7 +67,13 @@ function HeroCarousel({ images, labels, yBounce, className = "" }: HeroCarouselP
       </AnimatePresence>
 
       {/* Soft premium shadow overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none z-20" />
+      <div className={`absolute inset-0 bg-gradient-to-t pointer-events-none z-20 ${children ? 'from-black/90 via-black/60 to-black/40' : 'from-black/60 via-transparent to-transparent'}`} />
+      
+      {children && (
+        <div className="absolute inset-0 z-30 flex flex-col justify-center items-center text-center p-4 sm:p-6 bg-black/20">
+          {children}
+        </div>
+      )}
     </motion.div>
   );
 }
@@ -159,19 +166,6 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
         {/* Ambient radial orange glow background decoration */}
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[550px] h-[550px] bg-orange-500/5 rounded-full blur-3xl pointer-events-none z-0" />
 
-        {/* Hero Title & Text */}
-        <div className="relative z-10 mx-auto max-w-6xl px-4 flex flex-col items-center text-center space-y-4 mb-6">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
-            Premium Gated Managed Farmland
-          </h1>
-          <p className="text-sm sm:text-base text-zinc-400 max-w-3xl mx-auto leading-relaxed">
-            SK Farmland Developers offers legally verified, gated farmland near Bangalore — fully developed, actively managed, and ready to own. No legal stress. No maintenance headaches. Just land that works for you.
-          </p>
-          <p className="text-[10px] sm:text-xs text-zinc-500 font-mono tracking-widest uppercase pt-2">
-            Trusted by 1,000+ families and investors across Bangalore's southern corridors.
-          </p>
-        </div>
-
         <div className="relative z-10 mx-auto max-w-6xl px-4 grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 pt-0">
 
           {/* Top Hero Image Column: Infrastructure Carousel */}
@@ -179,7 +173,19 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
             images={[customHeroLeft, hero1_1, hero1_2, hero1_3, hero1_4, hero1_5, hero1_6]}
             labels={["SK Farmland Community", "Gated Entry Plaza", "Premium Infrastructure", "Secure Boundary", "Eco-Friendly Design", "Scenic View", "Lush Greenery"]}
             yBounce={[0, -6, 0]}
-          />
+          >
+            <div className="flex flex-col items-center text-center space-y-3 drop-shadow-lg">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
+                Premium Gated Managed Farmland
+              </h1>
+              <p className="text-xs sm:text-sm text-zinc-200 max-w-md mx-auto leading-relaxed">
+                SK Farmland Developers offers legally verified, gated farmland near Bangalore — fully developed, actively managed, and ready to own. No legal stress. No maintenance headaches. Just land that works for you.
+              </p>
+              <p className="text-[9px] sm:text-[10px] text-zinc-300 font-mono tracking-widest uppercase pt-1">
+                Trusted by 1,000+ families and investors across Bangalore's southern corridors.
+              </p>
+            </div>
+          </HeroCarousel>
 
           {/* Bottom Hero Image Column: Scenic/Community Carousel */}
           <HeroCarousel
@@ -437,7 +443,7 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-orange-500 font-mono mb-4">
               📍 Start Your Journey Today
             </span>
-            <div className="space-y-4 w-full max-w-sm mb-6 flex flex-col items-center">
+            <div className="space-y-4 w-full max-w-sm flex flex-col items-center">
               <div className="flex items-center gap-3 text-white text-sm md:text-base font-semibold">
                 <span className="text-orange-500">👉</span> Explore our projects
               </div>
@@ -449,25 +455,7 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
-              <button
-                onClick={onBookClick}
-                className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-orange-600 to-amber-500 text-white font-bold uppercase tracking-wider text-sm px-8 py-4 rounded-full hover:from-orange-500 hover:to-amber-400 transition-all duration-300 shadow-[0_4px_15px_rgba(249,115,22,0.2)] cursor-pointer"
-              >
-                <Calendar size={16} />
-                Book Free Site Visit
-              </button>
-              <button
-                onClick={() => {
-                  const message = encodeURIComponent('Hi SK Farmland Developers, I am interested in your projects. Please share more details.');
-                  window.open(`https://wa.me/917411131002?text=${message}`, '_blank');
-                }}
-                className="flex-1 flex items-center justify-center gap-2 bg-[#14532d] hover:bg-[#166534] text-white font-bold uppercase tracking-wider text-sm px-8 py-4 rounded-full transition-all duration-300 shadow-[0_4px_15px_rgba(20,83,45,0.2)] cursor-pointer border border-emerald-800/30"
-              >
-                <MessageCircle size={16} />
-                WhatsApp
-              </button>
-            </div>
+
           </div>
         </div>
       </motion.section>
@@ -543,24 +531,7 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
               </div>
             </div>
 
-            <div className="pt-6 flex flex-col sm:flex-row justify-center gap-4">
-              <button
-                onClick={() => onBookClick("Project 1")}
-                className="flex items-center justify-center gap-2 bg-gradient-to-r from-orange-600 to-amber-500 text-white font-bold uppercase tracking-wider px-8 py-4 rounded-xl hover:from-orange-500 hover:to-amber-400 transition-all shadow-[0_8px_20px_rgba(249,115,22,0.3)] cursor-pointer"
-              >
-                <Calendar size={18} />
-                Book Free Site Visit
-              </button>
-              <button
-                onClick={() => {
-                  const message = encodeURIComponent('Hi SK Farmland Developers, I am interested in getting the price details for "Project 1". Please share the pricing information.');
-                  window.open(`https://wa.me/917411131002?text=${message}`, '_blank');
-                }}
-                className="flex items-center justify-center gap-2 bg-[#14532d] hover:bg-[#166534] text-white font-bold uppercase tracking-wider px-8 py-4 rounded-xl transition-all shadow-[0_8px_20px_rgba(20,83,45,0.3)] cursor-pointer border border-emerald-800/30"
-              >
-                Get Price on WhatsApp →
-              </button>
-            </div>
+
           </div>
         </div>
       </motion.section>
