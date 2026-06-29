@@ -68,7 +68,7 @@ function HeroCarousel({ images, labels, yBounce, className = "", children }: Her
 
       {/* Soft premium shadow overlay */}
       <div className={`absolute inset-0 bg-gradient-to-t pointer-events-none z-20 ${children ? 'from-black/90 via-black/60 to-black/40' : 'from-black/60 via-transparent to-transparent'}`} />
-      
+
       {children && (
         <div className="absolute inset-0 z-30 flex flex-col justify-center items-center text-center p-4 sm:p-6 bg-black/20">
           {children}
@@ -174,17 +174,7 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
             labels={["SK Farmland Community", "Gated Entry Plaza", "Premium Infrastructure", "Secure Boundary", "Eco-Friendly Design", "Scenic View", "Lush Greenery"]}
             yBounce={[0, -6, 0]}
           >
-            <div className="flex flex-col items-center text-center space-y-3 drop-shadow-lg">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
-                Premium Gated Managed Farmland
-              </h1>
-              <p className="text-xs sm:text-sm text-zinc-200 max-w-md mx-auto leading-relaxed">
-                SK Farmland Developers offers legally verified, gated farmland near Bangalore — fully developed, actively managed, and ready to own. No legal stress. No maintenance headaches. Just land that works for you.
-              </p>
-              <p className="text-[9px] sm:text-[10px] text-zinc-300 font-mono tracking-widest uppercase pt-1">
-                Trusted by 1,000+ families and investors across Bangalore's southern corridors.
-              </p>
-            </div>
+
           </HeroCarousel>
 
           {/* Bottom Hero Image Column: Scenic/Community Carousel */}
@@ -479,7 +469,7 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
 
         <div className="bg-[#090909] border border-zinc-800 rounded-2xl p-6 md:p-10 shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
           <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6">Project 1</h3>
-          
+
           <div className="mb-8">
             <HeroCarousel
               images={[project1_1, project1_2, project1_3, project1_4, project1_5, project1_6, project1_7, project1_8]}
@@ -493,7 +483,7 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
             <h4 className="text-xl font-bold text-orange-500 flex items-center gap-2">
               🌿 Project Highlights
             </h4>
-            
+
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm md:text-base text-zinc-300">
               <li className="flex items-start gap-2"><Check className="text-orange-500 w-5 h-5 shrink-0 mt-0.5" /> 350 Acres of premium farmland with 550 plots available in various sizes.</li>
               <li className="flex items-start gap-2"><Check className="text-orange-500 w-5 h-5 shrink-0 mt-0.5" /> Grand entrance arch with an elegant main gate.</li>
@@ -502,7 +492,7 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
               <li className="flex items-start gap-2"><Check className="text-orange-500 w-5 h-5 shrink-0 mt-0.5" /> Wide cement concrete main roads and well-laid internal roads.</li>
               <li className="flex items-start gap-2"><Check className="text-orange-500 w-5 h-5 shrink-0 mt-0.5" /> Street lighting throughout the project.</li>
               <li className="flex items-start gap-2"><Check className="text-orange-500 w-5 h-5 shrink-0 mt-0.5" /> Front picket compound fencing provided for every plot.</li>
-              <li className="flex items-start gap-2"><Check className="text-orange-500 w-5 h-5 shrink-0 mt-0.5" /> 
+              <li className="flex items-start gap-2"><Check className="text-orange-500 w-5 h-5 shrink-0 mt-0.5" />
                 <div>
                   <span className="font-semibold text-white">4-Acre Clubhouse featuring:</span>
                   <ul className="ml-4 mt-2 space-y-1 text-zinc-400">

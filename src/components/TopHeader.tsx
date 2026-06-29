@@ -11,9 +11,7 @@ export default function TopHeader({ onClose }: TopHeaderProps) {
   const [index, setIndex] = useState(0);
 
   const lines = [
-    { text: "350 Acres Premium Farmland — Anekal Thalli Road", isLink: false },
-    { text: "New Launch: SK Banyan Echoes — Sikkanapalli", isLink: false },
-    { text: "Site Visits Available Every Weekend — Book Now on WhatsApp", isLink: true }
+    { text: "350 Acres Premium Farmland — Anekal Thalli Road", isLink: false }
   ];
 
   useEffect(() => {
@@ -42,7 +40,7 @@ export default function TopHeader({ onClose }: TopHeaderProps) {
       >
 
         <div className="mx-auto max-w-7xl flex items-center justify-between gap-4">
-          
+
           {/* Empty left spacer on desktop to balance the layout perfectly centering the message */}
           <div className="hidden md:block w-8" />
 
@@ -58,24 +56,24 @@ export default function TopHeader({ onClose }: TopHeaderProps) {
                 className="flex items-center justify-center gap-1.5 text-center w-full"
               >
                 <Sparkles size={11} className="fill-current text-black shrink-0 animate-pulse" />
-                
+
                 {lines[index].isLink ? (
                   <button
                     onClick={handleWhatsAppRedirect}
                     className="text-xs sm:text-sm md:text-2xl font-black uppercase tracking-wider text-white hover:scale-105 transition-transform cursor-pointer flex items-center gap-2 leading-tight"
-                    style={{ 
-                      textShadow: '-1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px 1.5px 0 #000, 3px 3px 0 #000', 
-                      fontFamily: 'Impact, "Arial Black", sans-serif' 
+                    style={{
+                      textShadow: '-1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px 1.5px 0 #000, 3px 3px 0 #000',
+                      fontFamily: 'Impact, "Arial Black", sans-serif'
                     }}
                   >
                     {lines[index].text}
                   </button>
                 ) : (
-                  <span 
+                  <span
                     className="text-xs sm:text-sm md:text-2xl font-black uppercase tracking-wider text-white leading-tight"
-                    style={{ 
-                      textShadow: '-1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px 1.5px 0 #000, 3px 3px 0 #000', 
-                      fontFamily: 'Impact, "Arial Black", sans-serif' 
+                    style={{
+                      textShadow: '-1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px 1.5px 0 #000, 3px 3px 0 #000',
+                      fontFamily: 'Impact, "Arial Black", sans-serif'
                     }}
                   >
                     {lines[index].text}
