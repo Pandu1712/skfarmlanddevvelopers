@@ -241,7 +241,7 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
         variants={sectionVariants}
         className="mx-auto max-w-6xl px-4 py-4 space-y-4 text-left"
       >
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-orange-500/10 rounded-full border border-orange-500/20 text-orange-400 font-mono text-xs uppercase tracking-widest">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-orange-500/10 rounded-full border border-white text-orange-400 font-mono text-xs uppercase tracking-widest">
           <Leaf size={14} className="animate-pulse" />
           Own Your Dream Farmland
         </div>
@@ -299,7 +299,7 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
             <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
               🏡 Farmland
             </h3>
-            <div className="h-px w-full bg-zinc-800 my-4" />
+            <div className="h-px w-full bg-orange-600 my-4" />
             <p className="text-sm text-zinc-300 font-semibold mb-4">
               Plot Size Starts From 0.25 Quarter Acre, 0.5 Half Acre, or 1–2 Acres)
             </p>
@@ -309,13 +309,13 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
           </div>
 
           <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 border-2 border-orange-600 rounded-2xl p-6 shadow-[0_0_20px_rgba(249,115,22,0.1)] relative hover:border-orange-500 transition-colors">
-            <div className="absolute top-0 right-6 -translate-y-1/2 bg-orange-500 text-black text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full">
+            <div className="absolute top-0 right-6 -translate-y-1/2 bg-orange-500 text-white border border-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full">
               Hassle-Free Option
             </div>
             <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
               🌾 Managed Farmland
             </h3>
-            <div className="h-px w-full bg-zinc-800 my-4" />
+            <div className="h-px w-full bg-orange-600 my-4" />
             <ul className="space-y-3 text-sm text-zinc-400">
               {['Maintenance, plantation & basic upkeep handled', '35 plants with drip irrigation system', 'Individual water connection for each plot', 'Picket compound fencing in front of each plot for better layout appearance', '24/7 security', 'Internal Access Road', 'Cement Concrete Roads', 'Solar street lights', 'Ideal for investment without daily involvement'].map((f, i) => (
                 <li key={i} className="flex gap-2 items-start">
@@ -331,7 +331,7 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
               🌿 Plain Farmland
             </h3>
             <p className="text-xs text-zinc-500 uppercase tracking-widest mb-2">(Without Development)</p>
-            <div className="h-px w-full bg-zinc-800 my-4" />
+            <div className="h-px w-full bg-orange-600 my-4" />
             <ul className="space-y-3 text-sm text-zinc-400">
               {['Budget-friendly land options', 'Freedom to develop as per your choice', 'Suitable for long-term investment and future development'].map((f, i) => (
                 <li key={i} className="flex gap-2 items-start">
@@ -371,7 +371,7 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
                 <span>Generate rental income from weekend stays & tourists</span>
               </li>
             </ul>
-            <div className="inline-block px-4 py-2 bg-orange-500/10 border border-orange-500/20 text-orange-400 rounded-lg text-sm font-semibold">
+            <div className="inline-block px-4 py-2 bg-orange-500/10 border border-white text-white rounded-lg text-sm font-semibold">
               Turn your farmland into a lifestyle asset + income source.
             </div>
           </div>
@@ -380,10 +380,10 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
             <h2 className="text-xl font-bold text-white mb-6 flex items-center justify-center gap-2">
               <span className="text-xl">💵</span> Investment Range
             </h2>
-            <div className="text-2xl md:text-3xl font-extrabold text-orange-400 tracking-tight mb-2 flex justify-center items-center gap-2">
-              👉 <span className="[-webkit-text-stroke:1px_white]">₹499/- to ₹849/-</span> <span className="text-sm font-medium text-zinc-400">per sq.ft</span>
+            <div className="text-2xl md:text-3xl font-extrabold text-orange-400 tracking-tight mb-2 flex flex-wrap justify-center items-center gap-2">
+              👉 <span className="[-webkit-text-stroke:0.5px_white]">₹499/- to ₹849/-</span> <span className="text-sm font-medium text-zinc-400">per sq.ft</span>
             </div>
-            <p className="text-[10px] sm:text-xs text-zinc-500 font-mono mt-4">
+            <p className="text-xs sm:text-sm text-zinc-400 font-mono mt-4">
               (Price subject to change based on project and location)
             </p>
           </div>
@@ -392,11 +392,13 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
             <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
               <span className="text-2xl">🏡</span> Why Choose SK Farmland Developers
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm text-zinc-400">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-6 gap-x-6">
               {['100% Clear Title & Legal Verification', 'Options: Private, Managed & Plain Land', 'Projects available near Bangalore & Pondicherry', 'Prime locations with good road connectivity', 'Transparent & hassle-free process', 'Complete guidance from booking to registration'].map((f, i) => (
-                <div key={i} className="flex gap-2 items-start">
-                  <Check size={18} className="text-orange-500 shrink-0" />
-                  <span className="leading-tight">{f}</span>
+                <div key={i} className="flex gap-4 items-start group">
+                  <div className="bg-orange-500/10 p-2 rounded-full group-hover:bg-orange-500/20 transition-colors shrink-0">
+                    <Check size={16} className="text-orange-500 shrink-0" />
+                  </div>
+                  <span className="text-sm font-medium text-zinc-300 leading-snug mt-1 break-words">{f}</span>
                 </div>
               ))}
             </div>
