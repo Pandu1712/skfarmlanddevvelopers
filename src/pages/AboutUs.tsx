@@ -1,10 +1,39 @@
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'motion/react';
+import { useRef, useState, useEffect } from 'react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import { ShieldCheck, FileText, Milestone, Zap, Sprout, Landmark, MapPin, Smile, Compass, Sparkles, PhoneCall, Check, Leaf, TrendingUp, DollarSign, Home as HomeIcon, Calendar, ArrowRight, Award } from 'lucide-react';
 import { trustHighlights, incomeGenerators } from '../data';
 import { PageId } from '../types';
-import gallery7 from '../assets/gallery-7.jpeg';
-import gallery8 from '../assets/gallery-8.jpeg';
+import gallery1 from '../assets/gallery-1.jpeg';
+import gallery2 from '../assets/gallery-2.jpeg';
+import gallery3 from '../assets/gallery-3.jpeg';
+import gallery4 from '../assets/gallery-4.jpeg';
+import gallery5 from '../assets/gallery-5.jpeg';
+
+function AboutCarousel({ images }: { images: string[] }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [images.length]);
+
+  return (
+    <AnimatePresence initial={false}>
+      <motion.img
+        key={currentIndex}
+        src={images[currentIndex]}
+        alt="About Us Gallery"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 1, ease: "easeInOut" }}
+        className="absolute inset-0 w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-700"
+      />
+    </AnimatePresence>
+  );
+}
 
 interface AboutUsProps {
   setActivePage: (page: PageId) => void;
@@ -138,7 +167,7 @@ export default function AboutUs({ setActivePage, onBookClick }: AboutUsProps) {
 
       {/* Legacy Story Section */}
       <section id="about-story" className="mx-auto max-w-5xl px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center bg-[#090909] border border-zinc-900 rounded-3xl p-6 md:p-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center bg-[#090909] border-2 border-orange-600 rounded-3xl p-6 md:p-10 hover:border-orange-500 transition-colors">
           
           <div className="space-y-6">
             <h2 className="text-2xl font-bold text-white tracking-tight">Our Vision</h2>
@@ -162,15 +191,9 @@ export default function AboutUs({ setActivePage, onBookClick }: AboutUsProps) {
           </div>
 
           <div ref={imgContainerRef} className="relative group">
-            <div className="relative rounded-2xl overflow-hidden border border-zinc-800 h-80">
-              <motion.img
-                src={gallery7}
-                alt="Agricultural plantation grid"
-                referrerPolicy="no-referrer"
-                style={{ y: imgY }}
-                className="absolute -top-[15%] left-0 w-full h-[130%] object-cover opacity-85 group-hover:scale-105 transition-all duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none" />
+            <div className="relative rounded-2xl overflow-hidden border-2 border-orange-600 hover:border-orange-500 transition-colors h-64 bg-black">
+              <AboutCarousel images={[gallery1, gallery2, gallery3, gallery4, gallery5]} />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none z-20" />
             </div>
           </div>
 
@@ -197,7 +220,7 @@ export default function AboutUs({ setActivePage, onBookClick }: AboutUsProps) {
             <div
               key={i}
               id={`why-card-${i}`}
-              className="bg-[#0A0A0A] border border-zinc-900/80 rounded-xl p-5 hover:border-orange-500/25 transition-all duration-300 space-y-3 flex flex-col justify-between"
+              className="bg-[#0A0A0A] border-2 border-orange-600 hover:border-orange-500 rounded-xl p-5 transition-all duration-300 space-y-3 flex flex-col justify-between"
             >
               <div className="space-y-3">
                 <div className="w-9 h-9 rounded-full bg-orange-500/5 border border-orange-500/10 flex items-center justify-center">
@@ -214,14 +237,14 @@ export default function AboutUs({ setActivePage, onBookClick }: AboutUsProps) {
 
       {/* Property Visit Assistance */}
       <section id="about-site-visit-assistance" className="mx-auto max-w-5xl px-4 space-y-8 mt-12">
-        <div className="bg-[#090909] border border-zinc-900 rounded-3xl p-6 md:p-10">
+        <div className="bg-[#090909] border-2 border-orange-600 hover:border-orange-500 transition-colors rounded-3xl p-6 md:p-10">
           <h2 className="text-2xl font-bold text-white tracking-tight mb-4 flex items-center gap-2">
             <MapPin className="text-orange-500" /> Property Visit Assistance
           </h2>
           <p className="text-sm text-zinc-400 leading-relaxed mb-6">
             We welcome every prospective buyer to visit our farmland projects. Once you arrive at the project location, our experienced team will personally accompany you and show you the entire property.
           </p>
-          <div className="bg-black/50 border border-zinc-800 rounded-xl p-6">
+          <div className="bg-black/50 border-2 border-orange-600 hover:border-orange-500 transition-colors rounded-xl p-6">
             <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
               <Sparkles className="text-orange-500 w-4 h-4" /> During your visit, we will explain:
             </h3>
@@ -243,7 +266,7 @@ export default function AboutUs({ setActivePage, onBookClick }: AboutUsProps) {
 
       {/* Our Commitment CTA */}
       <section id="about-commitment" className="mx-auto max-w-5xl px-4 mt-12">
-        <div className="bg-gradient-to-r from-zinc-950 via-[#120F0B] to-zinc-950 border border-orange-500/20 rounded-2xl p-6 md:p-10 flex flex-col lg:flex-row items-center justify-between gap-8 shadow-xl">
+        <div className="bg-gradient-to-r from-zinc-950 via-[#120F0B] to-zinc-950 border-2 border-orange-600 hover:border-orange-500 transition-colors rounded-2xl p-6 md:p-10 flex flex-col lg:flex-row items-center justify-between gap-8 shadow-xl">
           <div className="space-y-4 max-w-2xl text-center lg:text-left">
             <span className="text-[10px] font-bold uppercase tracking-widest text-orange-400 font-mono flex items-center justify-center lg:justify-start gap-1">
               <ShieldCheck size={11} className="animate-pulse" />
@@ -257,13 +280,7 @@ export default function AboutUs({ setActivePage, onBookClick }: AboutUsProps) {
             </p>
           </div>
 
-          <button
-            onClick={onBookClick}
-            className="w-full md:w-auto shrink-0 flex items-center justify-center gap-2 bg-gradient-to-r from-orange-600 to-amber-500 text-white font-bold uppercase tracking-wider text-xs px-8 py-4 rounded-xl hover:from-orange-500 hover:to-amber-400 transition-all duration-300 shadow-[0_4px_15px_rgba(249,115,22,0.2)] cursor-pointer"
-          >
-            <PhoneCall size={14} />
-            Book Site Visit
-          </button>
+
         </div>
       </section>
 

@@ -211,7 +211,7 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
               {statsData.map((stat, i) => (
                 <div
                   key={i}
-                  className="flex flex-col items-center p-5 bg-zinc-950/60 rounded-xl border border-zinc-900/60 hover:border-orange-500/30 hover:shadow-[0_0_15px_rgba(249,115,22,0.06)] transition-all duration-300 w-full"
+                  className="flex flex-col items-center p-5 bg-zinc-950/60 rounded-xl border-2 border-orange-600 hover:border-orange-500 hover:shadow-[0_0_15px_rgba(249,115,22,0.06)] transition-all duration-300 w-full"
                 >
                   <motion.div
                     animate={{ y: [0, -6, 0] }}
@@ -266,7 +266,7 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
         variants={sectionVariants}
         className="mx-auto max-w-6xl px-4 py-4"
       >
-        <div className="bg-zinc-950 border border-zinc-800/80 rounded-2xl p-6 md:p-10 hover:border-orange-500/30 transition-colors shadow-2xl relative overflow-hidden">
+        <div className="bg-zinc-950 border-2 border-orange-600 rounded-2xl p-6 md:p-10 hover:border-orange-500 transition-colors shadow-2xl relative overflow-hidden">
           <div className="absolute -top-40 -right-40 w-80 h-80 bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
           <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-6 flex items-center gap-3">
             <span className="text-2xl">🌄</span> Experience True Nature Living
@@ -295,7 +295,7 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-6 hover:border-orange-500/40 transition-colors">
+          <div className="bg-zinc-950 border-2 border-orange-600 rounded-2xl p-6 hover:border-orange-500 transition-colors">
             <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
               🏡 Farmland
             </h3>
@@ -308,7 +308,7 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
             </p>
           </div>
 
-          <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 border border-orange-500/30 rounded-2xl p-6 shadow-[0_0_20px_rgba(249,115,22,0.1)] relative">
+          <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 border-2 border-orange-600 rounded-2xl p-6 shadow-[0_0_20px_rgba(249,115,22,0.1)] relative hover:border-orange-500 transition-colors">
             <div className="absolute top-0 right-6 -translate-y-1/2 bg-orange-500 text-black text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full">
               Hassle-Free Option
             </div>
@@ -326,7 +326,7 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
             </ul>
           </div>
 
-          <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-6 hover:border-orange-500/40 transition-colors">
+          <div className="bg-zinc-950 border-2 border-orange-600 rounded-2xl p-6 hover:border-orange-500 transition-colors">
             <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
               🌿 Plain Farmland
             </h3>
@@ -353,7 +353,7 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
         className="mx-auto max-w-6xl px-4 py-6"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2 bg-[#090909] border border-zinc-800/80 rounded-2xl p-6 md:p-8 hover:border-orange-500/30 transition-colors">
+          <div className="lg:col-span-2 bg-[#090909] border-2 border-orange-600 rounded-2xl p-6 md:p-8 hover:border-orange-500 transition-colors">
             <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
               <span className="text-2xl">💰</span> Earn Income From Your Farmland
             </h2>
@@ -376,19 +376,19 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-orange-900/40 to-black border border-orange-500/30 rounded-2xl p-6 md:p-8 shadow-[0_0_20px_rgba(249,115,22,0.1)] flex flex-col justify-center text-center">
+          <div className="bg-gradient-to-br from-orange-900/40 to-black border-2 border-orange-600 rounded-2xl p-6 md:p-8 shadow-[0_0_20px_rgba(249,115,22,0.1)] flex flex-col justify-center text-center hover:border-orange-500 transition-colors">
             <h2 className="text-xl font-bold text-white mb-6 flex items-center justify-center gap-2">
               <span className="text-xl">💵</span> Investment Range
             </h2>
             <div className="text-2xl md:text-3xl font-extrabold text-orange-400 tracking-tight mb-2 flex justify-center items-center gap-2">
-              👉 ₹499/- to ₹849/- <span className="text-sm font-medium text-zinc-400">per sq.ft</span>
+              👉 <span className="[-webkit-text-stroke:1px_white]">₹499/- to ₹849/-</span> <span className="text-sm font-medium text-zinc-400">per sq.ft</span>
             </div>
             <p className="text-[10px] sm:text-xs text-zinc-500 font-mono mt-4">
               (Price subject to change based on project and location)
             </p>
           </div>
 
-          <div className="lg:col-span-3 bg-zinc-950 border border-zinc-800 rounded-2xl p-6 md:p-8">
+          <div className="lg:col-span-3 bg-zinc-950 border-2 border-orange-600 rounded-2xl p-6 md:p-8 hover:border-orange-500 transition-colors">
             <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
               <span className="text-2xl">🏡</span> Why Choose SK Farmland Developers
             </h2>
@@ -413,7 +413,7 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
         className="mx-auto max-w-6xl px-4 py-6"
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-[#090909] border border-zinc-800 rounded-2xl p-8 flex flex-col justify-center">
+          <div className="bg-[#090909] border-2 border-orange-600 rounded-2xl p-8 flex flex-col justify-center hover:border-orange-500 transition-colors">
             <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
               <span className="text-2xl">🌄</span> Experience Nature Your Way
             </h2>
@@ -428,7 +428,7 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
             </p>
           </div>
 
-          <div className="bg-gradient-to-tr from-zinc-900 to-zinc-950 border border-orange-500/30 rounded-2xl p-8 flex flex-col justify-center items-center text-center shadow-[0_5px_30px_rgba(249,115,22,0.06)] relative overflow-hidden">
+          <div className="bg-gradient-to-tr from-zinc-900 to-zinc-950 border-2 border-orange-600 rounded-2xl p-8 flex flex-col justify-center items-center text-center shadow-[0_5px_30px_rgba(249,115,22,0.06)] relative overflow-hidden hover:border-orange-500 transition-colors">
             <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/5 rounded-full blur-3xl pointer-events-none" />
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-orange-500 font-mono mb-4">
               📍 Start Your Journey Today
@@ -436,9 +436,6 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
             <div className="space-y-4 w-full max-w-sm flex flex-col items-center">
               <div className="flex items-center gap-3 text-white text-sm md:text-base font-semibold">
                 <span className="text-orange-500">👉</span> Explore our projects
-              </div>
-              <div className="flex items-center gap-3 text-white text-sm md:text-base font-semibold">
-                <span className="text-orange-500">👉</span> Book a site Visit
               </div>
               <div className="flex items-center gap-3 text-white text-sm md:text-base font-semibold text-left">
                 <span className="text-orange-500">👉</span> Choose the farmland that suits your needs
@@ -467,7 +464,7 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
           </p>
         </div>
 
-        <div className="bg-[#090909] border border-zinc-800 rounded-2xl p-6 md:p-10 shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
+        <div className="bg-[#090909] border-2 border-orange-600 rounded-2xl p-6 md:p-10 shadow-[0_8px_30px_rgba(0,0,0,0.5)] hover:border-orange-500 transition-colors">
           <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6">Project 1</h3>
 
           <div className="mb-8">
@@ -475,7 +472,7 @@ export default function Home({ setActivePage, onBookClick }: HomeProps) {
               images={[project1_1, project1_2, project1_3, project1_4, project1_5, project1_6, project1_7, project1_8]}
               labels={Array(8).fill("Project 1")}
               yBounce={[0, 0, 0]}
-              className="!aspect-[21/9] max-h-[500px]"
+              className="!aspect-[16/9] md:!aspect-[16/10] max-h-[700px]"
             />
           </div>
 

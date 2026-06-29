@@ -52,14 +52,14 @@ export default function Contact({ onBookClick }: ContactProps) {
       transition={{ duration: 0.5, ease: 'easeOut' }}
       className="space-y-10 pb-12 pt-4"
     >
-      
+
       {/* Header */}
       <section id="contact-hero" className="text-center space-y-4 max-w-3xl mx-auto px-4">
         <div className="inline-flex items-center gap-2 px-3 py-1 bg-orange-500/10 rounded-full border border-orange-500/20 text-orange-400 font-mono text-[10px] uppercase tracking-widest">
           <Calendar size={11} className="animate-pulse" />
           Get in Touch
         </div>
-        <motion.h1 
+        <motion.h1
           initial="hidden"
           animate="visible"
           variants={{
@@ -89,10 +89,10 @@ export default function Contact({ onBookClick }: ContactProps) {
       {/* Main Grid */}
       <section id="contact-grid-section" className="mx-auto max-w-5xl px-4">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          
+
           {/* Left Form: Form submission card */}
-          <div className="lg:col-span-7 bg-[#0A0A0A] border border-zinc-900 rounded-2xl p-5 md:p-6 space-y-4">
-            
+          <div className="lg:col-span-7 bg-[#0A0A0A] border-2 border-orange-600 rounded-2xl p-5 md:p-6 space-y-4 hover:border-orange-500 transition-colors">
+
             {!isSuccess ? (
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="space-y-2">
@@ -143,57 +143,28 @@ export default function Contact({ onBookClick }: ContactProps) {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {/* Interested Layout */}
-                    <div>
-                      <label className="block text-xs font-medium text-zinc-300 mb-1.5">Interested Option</label>
-                      <select
-                        value={formData.interest}
-                        onChange={(e) => setFormData({ ...formData, interest: e.target.value })}
-                        className="w-full bg-[#141414] border border-zinc-800 focus:border-orange-500 text-zinc-100 rounded-lg py-2.5 px-3 text-sm outline-none transition-all"
-                      >
-                        <option value="Managed Farmland (Hassle-Free Option)">Managed Farmland (Hassle-Free Option)</option>
-                        {projectList.map((project) => (
-                          <option key={project.id} value={project.name}>
-                            {project.name} ({project.type})
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    {/* Select Budget (dropdown list) */}
-                    <div>
-                      <label className="block text-xs font-medium text-zinc-300 mb-1.5">Select Budget</label>
-                      <select
-                        value={formData.budget}
-                        onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                        className="w-full bg-[#141414] border border-zinc-800 focus:border-orange-500 text-zinc-100 rounded-lg py-2.5 px-3 text-sm outline-none transition-all"
-                      >
-                        <option value="₹40–60 Lakhs">₹40–60 Lakhs</option>
-                        <option value="₹60–80 Lakhs">₹60–80 Lakhs</option>
-                        <option value="₹80 Lakhs & Above">₹80 Lakhs & Above</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  {/* Message */}
+                  {/* Select Budget (dropdown list) */}
                   <div>
-                    <label className="block text-xs font-medium text-zinc-300 mb-1.5">Preferred Date / Additional Notes</label>
-                    <textarea
-                      value={formData.notes}
-                      onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                      placeholder="Specify preferred site visit dates or custom requirements..."
-                      rows={3}
-                      className="w-full bg-[#141414] border border-zinc-800 focus:border-orange-500 text-zinc-100 rounded-lg p-3 text-sm outline-none transition-all resize-none"
-                    />
+                    <label className="block text-xs font-medium text-zinc-300 mb-1.5">Select Budget</label>
+                    <select
+                      value={formData.budget}
+                      onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+                      className="w-full bg-[#141414] border border-zinc-800 focus:border-orange-500 text-zinc-100 rounded-lg py-2.5 px-3 text-sm outline-none transition-all"
+                    >
+                      <option value="₹40–60 Lakhs">₹40–60 Lakhs</option>
+                      <option value="₹60–80 Lakhs">₹60–80 Lakhs</option>
+                      <option value="₹80 Lakhs & Above">₹80 Lakhs & Above</option>
+                    </select>
                   </div>
+
+
                 </div>
 
                 <div className="pt-2 space-y-3">
                   <p className="text-[11px] text-orange-400 font-medium font-mono text-center flex items-center justify-center gap-1.5 bg-orange-500/5 py-2 px-3 border border-orange-500/10 rounded-lg">
                     <span>👉</span> “Limited plots available – Book your site visit now
                   </p>
-                  
+
                   <button
                     type="submit"
                     disabled={isSubmitting}
@@ -214,10 +185,10 @@ export default function Contact({ onBookClick }: ContactProps) {
                 <div className="w-12 h-12 rounded-full bg-orange-500/10 text-orange-500 border border-orange-500/20 flex items-center justify-center mx-auto">
                   <CheckCircle2 size={24} />
                 </div>
-                
+
                 <h3 className="text-xl font-bold text-white">Inquiry Received Safely!</h3>
                 <p className="text-xs text-zinc-400 max-w-sm mx-auto leading-relaxed">
-                  Thank you, <strong className="text-orange-400">{formData.name}</strong>. Your custom inquiry regarding <strong className="text-zinc-200">{formData.interest}</strong> has been logged in our databases.
+                  Thank you, <strong className="text-orange-400">{formData.name}</strong>. Your custom inquiry has been logged in our databases.
                 </p>
 
                 <div className="p-4 bg-zinc-950 rounded-xl border border-zinc-900 text-xs text-zinc-400 max-w-sm mx-auto leading-relaxed">
@@ -237,20 +208,21 @@ export default function Contact({ onBookClick }: ContactProps) {
 
           {/* Right details: Direct communication cards */}
           <div className="lg:col-span-5 space-y-6">
-            
+
             {/* Quick Contact Information */}
-            <div className="bg-[#0A0A0A] border border-zinc-900 rounded-2xl p-6 space-y-5">
-              <h3 className="text-base font-bold text-white tracking-tight border-b border-zinc-900 pb-3">Office Headquarter</h3>
-              
+            <div className="bg-[#0A0A0A] border-2 border-orange-600 rounded-2xl p-6 space-y-5 hover:border-orange-500 transition-colors">
+              <h3 className="text-base font-bold text-white tracking-tight border-b border-zinc-900 pb-3">Office </h3>
+
               <div className="space-y-4 text-xs text-zinc-400">
                 <div className="flex items-start gap-3">
                   <span className="p-2 rounded-lg bg-orange-500/5 text-orange-500 border border-orange-500/10 shrink-0">
                     <MapPin size={14} />
                   </span>
                   <div>
-                    <h5 className="font-bold text-zinc-200">Bengaluru Office</h5>
+                    <h5 className="font-bold text-zinc-200">Office</h5>
                     <p className="mt-1 leading-relaxed">
-                      Electronic City Phase 1, Near Metro Pillar, Bengaluru, Karnataka 560100
+
+                      Gumalpura Anekal thalli road tamilnadu
                     </p>
                   </div>
                 </div>
@@ -288,6 +260,6 @@ export default function Contact({ onBookClick }: ContactProps) {
         </div>
       </section>
 
-     </motion.div>
+    </motion.div>
   );
 }

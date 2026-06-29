@@ -11,12 +11,12 @@ export default function MobileContactBar() {
   return (
     <div 
       id="mobile-contact-bar"
-      className="fixed bottom-0 left-0 right-0 z-50 flex h-14 w-full lg:hidden border-t border-zinc-900 shadow-[0_-4px_20px_rgba(0,0,0,0.5)]"
+      className="fixed bottom-0 left-0 right-0 z-50 flex h-12 w-full lg:hidden border-t border-zinc-900 shadow-[0_-4px_20px_rgba(0,0,0,0.5)]"
     >
       {/* Call Now Button */}
       <a
         href={phoneUrl}
-        className="flex-1 flex items-center justify-center gap-2 bg-red-600 text-white text-base font-bold uppercase tracking-wider transition-colors duration-300 hover:bg-red-700 active:bg-red-800"
+        className="flex-1 flex items-center justify-center gap-2 bg-amber-500 text-black text-base font-bold uppercase tracking-wider transition-colors duration-300 hover:bg-amber-600 active:bg-amber-700"
       >
         <Phone size={18} className="stroke-[2.5]" />
         Call Now

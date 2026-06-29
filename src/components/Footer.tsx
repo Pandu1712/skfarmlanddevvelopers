@@ -138,19 +138,20 @@ export default function Footer({ setActivePage, onBookClick }: FooterProps) {
                   <MapPin size={14} />
                 </span>
                 <span className="leading-relaxed">
-                  Head Office: Electronic City Phase 1, Near Metro Station, Bengaluru, Karnataka 560100
+                  Office:
+                  Gumalpura Anekal thalli road tamilnadu
                 </span>
               </div>
             </div>
 
-            <button
+            {/*  <button
               id="footer-book-visit-btn"
               onClick={onBookClick}
               className="mt-2 w-full flex items-center justify-center gap-2 border border-orange-500/30 text-orange-400 hover:text-white hover:bg-orange-600/10 px-4 py-2.5 rounded-lg text-xs font-semibold tracking-wider transition-all uppercase cursor-pointer"
             >
               <Sparkles size={11} className="text-orange-500" />
               Book Free Site Visit
-            </button>
+            </button> */}
           </div>
 
         </div>
