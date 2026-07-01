@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence, useInView, animate } from 'motion/react';
 import { Leaf, Award, Map, Users, Home as HomeIcon, Check, Calendar, MessageCircle } from 'lucide-react';
 import { PageId } from '../types';

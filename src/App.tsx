@@ -22,6 +22,8 @@ import Contact from './pages/Contact';
 import LegalPages from './pages/LegalPages';
 import Faqs from './pages/Faqs';
 import Testimonials from './pages/Testimonials';
+import AdminLogin from './pages/admin/AdminLogin';
+import AdminDashboard from './pages/admin/AdminDashboard';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -38,6 +40,13 @@ export default function App() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'auto' });
   }, [activePage]);
+
+  // Support for /?admin URL
+  useEffect(() => {
+    if (window.location.search.includes('admin') || window.location.pathname.includes('admin')) {
+      setActivePage('adminLogin');
+    }
+  }, []);
 
   const handleBookWithProject = (projectName?: string) => {
     if (projectName) {
@@ -62,22 +71,24 @@ export default function App() {
           id="root-website-layout"
           className="flex flex-col min-h-screen"
         >
-          {/* Sticky Navigation & Announcement Bar Container */}
-          <div className="sticky top-0 z-40 w-full flex flex-col shadow-md">
-            <Navbar
-              activePage={activePage}
-              setActivePage={setActivePage}
-              onBookClick={() => handleBookWithProject()}
-            />
-            <AnimatePresence initial={false}>
-              {showTopHeader && (
-                <TopHeader
-                  onClose={handleDismissTopHeader}
-                  onActionClick={() => handleBookWithProject()}
-                />
-              )}
-            </AnimatePresence>
-          </div>
+          {/* Hide Navbar and TopHeader on admin routes */}
+          {activePage !== 'adminLogin' && activePage !== 'adminDashboard' && (
+            <div className="sticky top-0 z-40 w-full flex flex-col shadow-md">
+              <Navbar
+                activePage={activePage}
+                setActivePage={setActivePage}
+                onBookClick={() => handleBookWithProject()}
+              />
+              <AnimatePresence initial={false}>
+                {showTopHeader && (
+                  <TopHeader
+                    onClose={handleDismissTopHeader}
+                    onActionClick={() => handleBookWithProject()}
+                  />
+                )}
+              </AnimatePresence>
+            </div>
+          )}
 
           <main id="main-content-area" className={`flex-grow pb-12 bg-black ${activePage === 'home' ? 'pt-0' : 'pt-6'}`}>
             <div className="w-full">
@@ -111,6 +122,12 @@ export default function App() {
               {(activePage === 'terms' || activePage === 'privacy' || activePage === 'disclaimer') && (
                 <LegalPages viewType={activePage} />
               )}
+              {activePage === 'adminLogin' && (
+                <AdminLogin setActivePage={setActivePage} />
+              )}
+              {activePage === 'adminDashboard' && (
+                <AdminDashboard setActivePage={setActivePage} />
+              )}
             </div>
           </main>
 
@@ -121,12 +138,14 @@ export default function App() {
             </div>
           )}
 
-          {/* Bottom Footer layout */}
-          <Footer setActivePage={setActivePage} onBookClick={() => handleBookWithProject()} />
-
-          {/* Sticky Widgets */}
-          <WhatsAppButton />
-          <MobileContactBar />
+          {/* Hide Footer and Widgets on admin routes */}
+          {activePage !== 'adminLogin' && activePage !== 'adminDashboard' && (
+            <>
+              <Footer setActivePage={setActivePage} onBookClick={() => handleBookWithProject()} />
+              <WhatsAppButton />
+              <MobileContactBar />
+            </>
+          )}
           
           {/* Site Visit Lead Capture Form Modal */}
           <BookVisitModal

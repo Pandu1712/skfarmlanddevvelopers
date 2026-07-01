@@ -158,7 +158,16 @@ export default function Footer({ setActivePage, onBookClick }: FooterProps) {
 
           <div className="text-center md:text-left space-y-2">
             <p className="text-[10px] text-zinc-500 uppercase tracking-widest font-mono">
-              © {currentYear} SK Farmland Developers. All Rights Reserved.
+              &copy; {currentYear} SK Farmland Developers. All rights reserved. 
+              <button 
+                onClick={() => {
+                  setActivePage('adminLogin');
+                  window.scrollTo(0, 0);
+                }} 
+                className="ml-2 text-zinc-800 hover:text-zinc-600 transition-colors"
+              >
+                &bull;
+              </button>
             </p>
 
             {/* Footer Bottom Links Grouped cleanly on the left to prevent WhatsApp button overlap */}
